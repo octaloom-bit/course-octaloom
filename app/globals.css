@@ -66,6 +66,32 @@ body{
 .hero h1 .accent{color:var(--purple)}
 .hero .sub{color:var(--muted);font-size:16px;margin-top:12px;max-width:46ch}
 
+/* ---------- welcome / outcomes ---------- */
+.welcome{position:relative;overflow:hidden;background:var(--white);border:1px solid rgba(113,46,172,.18);
+  border-radius:var(--radius);padding:30px 30px 26px;margin-bottom:18px;box-shadow:0 16px 44px rgba(32,30,75,.06);
+  opacity:0;transform:translateY(16px);animation:rise .6s cubic-bezier(.2,.7,.2,1) .05s forwards}
+.welcome::before{content:"";position:absolute;top:0;right:0;left:0;height:4px;background:linear-gradient(90deg,var(--purple),var(--green))}
+.welcome .wm{position:absolute;top:-46px;left:-40px;width:190px;height:auto;opacity:.05;pointer-events:none}
+.welcome > *{position:relative;z-index:1}
+.welcome h2{margin:0 0 12px;font-size:24px;font-weight:500}
+.welcome > p{margin:0 0 12px;font-size:14.5px;color:var(--ink);line-height:1.75;max-width:64ch}
+.welcome .accent{color:var(--purple);font-weight:500}
+.welcome-lead{color:var(--muted);margin-bottom:24px}
+.outcomes-title{font-family:var(--font-aeonik);font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--purple);margin-bottom:16px}
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px}
+.outcome{display:flex;gap:12px;align-items:flex-start;opacity:0;transform:translateY(10px);animation:rise .5s cubic-bezier(.2,.7,.2,1) forwards}
+.outcome:nth-child(1){animation-delay:.14s}
+.outcome:nth-child(2){animation-delay:.22s}
+.outcome:nth-child(3){animation-delay:.30s}
+.outcome:nth-child(4){animation-delay:.38s}
+.oc-icon{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--green);color:var(--blackhole);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-top:1px}
+.outcome strong{display:block;font-size:15px;font-weight:500;margin-bottom:4px}
+.outcome p{margin:0;font-size:13px;color:var(--muted);line-height:1.55}
+.welcome-contact{margin-top:24px;padding-top:18px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+.welcome-contact a{color:var(--purple);font-weight:500;text-decoration:none}
+.welcome-contact a:hover{text-decoration:underline}
+@media(max-width:600px){.outcomes{grid-template-columns:1fr}}
+
 /* ---------- course chapters ---------- */
 .chapters{display:flex;flex-direction:column;gap:12px;margin-top:8px}
 .chapter{display:flex;align-items:center;gap:18px;background:var(--white);border:1px solid var(--line);
@@ -229,8 +255,8 @@ button{font-family:inherit;cursor:pointer;border:none;border-radius:999px;font-w
 .footer{background:var(--blackhole);color:var(--natural);margin-top:auto}
 .footer .inner{max-width:1040px;margin:0 auto;padding:48px 24px 26px;
   display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:34px}
-.footer .col h4{font-family:var(--font-aeonik);font-size:11px;font-weight:700;letter-spacing:1.2px;
-  text-transform:uppercase;color:var(--green);margin:0 0 14px}
+.footer .col h4{font-family:var(--font-discovery);font-size:13px;font-weight:500;letter-spacing:.3px;
+  color:var(--green);margin:0 0 14px}
 .footer .col a{display:block;color:rgba(236,233,231,.78);text-decoration:none;font-size:14px;margin-bottom:9px;transition:.15s}
 .footer .col a:hover{color:#fff}
 .footer .brandcol .logo img{height:30px;width:auto;margin-bottom:12px}

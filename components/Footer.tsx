@@ -19,19 +19,19 @@ export default function Footer() {
 
         <div className="col">
           <h4>החברה</h4>
-          <a href={`${SITE}/about`} target="_blank" rel="noopener noreferrer">אודות</a>
-          <a href={`${SITE}/blog`} target="_blank" rel="noopener noreferrer">בלוג</a>
-          <a href={`${SITE}/contact`} target="_blank" rel="noopener noreferrer">צרו קשר</a>
+          <a href={`${SITE}/about-he`} target="_blank" rel="noopener noreferrer">אודות</a>
+          <a href={`${SITE}/blog-he`} target="_blank" rel="noopener noreferrer">בלוג</a>
+          <a href={`${SITE}/contact-he`} target="_blank" rel="noopener noreferrer">צרו קשר</a>
         </div>
 
         <div className="col">
           <h4>שירותי לינקדאין</h4>
-          <a href={`${SITE}/linkedin-for-organizations`} target="_blank" rel="noopener noreferrer">לינקדאין לארגונים</a>
-          <a href={`${SITE}/linkedin-for-executives`} target="_blank" rel="noopener noreferrer">לינקדאין למייסדים</a>
-          <a href={`${SITE}/linkedin-for-solopreneurs`} target="_blank" rel="noopener noreferrer">לינקדאין לעצמאים</a>
+          <a href={`${SITE}/linkedin-for-organizations-he`} target="_blank" rel="noopener noreferrer">לינקדאין לארגונים</a>
+          <a href={`${SITE}/linkedin-for-executives-he`} target="_blank" rel="noopener noreferrer">לינקדאין למייסדים</a>
+          <a href={`${SITE}/linkedin-for-solopreneurs-he`} target="_blank" rel="noopener noreferrer">לינקדאין לעצמאים</a>
           <h4 style={{ marginTop: 18 }}>עוד שירותים</h4>
-          <a href={`${SITE}/fractional-cmo`} target="_blank" rel="noopener noreferrer">Fractional CMO</a>
-          <a href={`${SITE}/ai-tools-agents`} target="_blank" rel="noopener noreferrer">כלי AI וסוכנים</a>
+          <a href={`${SITE}/fractional-cmo-he`} target="_blank" rel="noopener noreferrer">Fractional CMO</a>
+          <a href={`${SITE}/ai-tools-agents-he`} target="_blank" rel="noopener noreferrer">כלי AI וסוכנים</a>
           <a href={`${SITE}/workshops`} target="_blank" rel="noopener noreferrer">סדנאות</a>
         </div>
 
@@ -50,9 +50,9 @@ export default function Footer() {
       <div className="bar">
         <span className="copy-text">© 2026 OctaLoom. כל הזכויות שמורות</span>
         <span className="legal">
-          <a href={`${SITE}/privacy-policy`} target="_blank" rel="noopener noreferrer">פרטיות</a>
-          <a href={`${SITE}/terms-of-service`} target="_blank" rel="noopener noreferrer">תנאי שימוש</a>
-          <a href={`${SITE}/accessibility`} target="_blank" rel="noopener noreferrer">נגישות</a>
+          <a href={`${SITE}/privacy-policy-he`} target="_blank" rel="noopener noreferrer">פרטיות</a>
+          <a href={`${SITE}/terms-of-service-he`} target="_blank" rel="noopener noreferrer">תנאי שימוש</a>
+          <a href={`${SITE}/accessibility-he`} target="_blank" rel="noopener noreferrer">נגישות</a>
         </span>
       </div>
     </footer>
