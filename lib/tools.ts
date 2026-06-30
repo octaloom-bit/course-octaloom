@@ -34,7 +34,7 @@ export const TOOLS: Tool[] = [
   },
   {
     id: "headline",
-    title: "מחולל כותרות",
+    title: "מחולל כותרות (Headline)",
     desc: "כותרת פרופיל לפי 3 הנוסחאות מפרק 2. ממלאים שאלון, מקבלים 5 וריאציות.",
     href: "/tools/headline",
     type: "ai",
@@ -73,8 +73,8 @@ export const TOOLS: Tool[] = [
   },
   {
     id: "circulation-guide",
-    title: "מדריך הסירקולציה 🎁",
-    desc: "המתנה שלי על ה-Circulation Loop מפרק 3: סקרנות → פגיעות → אוטוריטה, שלושה סוגי פוסטים שמסתובבים כל שבוע. שלד מוכן, פרומפטים וקובץ SKILL לאוטומציה.",
+    title: "סקיל \"הסירקולציה\" להורדה",
+    desc: "המבנה שפירקתי בקורס, עכשיו בסקיל להורדה: סקרנות → פגיעות → אוטוריטה. שלושה סוגי פוסטים. פרומפטים וסקיל מוכן להורדה.",
     href: "https://www.octagoodies.com/circulation-post-guide",
     external: true,
     type: "static",
@@ -82,8 +82,8 @@ export const TOOLS: Tool[] = [
   },
   {
     id: "linkedin-commenter",
-    title: "LinkedIn Commenter Pro 🧩",
-    desc: "תוסף כרום חינמי שמנסח לכם תגובות בלינקדאין בקול שלכם ובשפת הפוסט. תגובות מעל 15 מילים שהאלגוריתם מקדם, 6 טונים, אתם מאשרים לפני שליחה.",
+    title: "LinkedIn Commenter Pro",
+    desc: "תוסף כרום חינמי שמנסח לכם תגובות בלינקדאין בקול שלכם ובשפת הפוסט.",
     href: "https://www.octagoodies.com/linkedin-commenter-pro",
     external: true,
     type: "static",
