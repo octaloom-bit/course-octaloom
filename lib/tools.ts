@@ -81,6 +81,15 @@ export const TOOLS: Tool[] = [
     status: "live",
   },
   {
+    id: "linkedin-commenter",
+    title: "LinkedIn Commenter Pro 🧩",
+    desc: "תוסף כרום חינמי שמנסח לכם תגובות בלינקדאין בקול שלכם ובשפת הפוסט. תגובות מעל 15 מילים שהאלגוריתם מקדם, 6 טונים, אתם מאשרים לפני שליחה.",
+    href: "https://www.octagoodies.com/linkedin-commenter-pro",
+    external: true,
+    type: "static",
+    status: "live",
+  },
+  {
     id: "b2b-outreach",
     title: "עוזר חיפוש הלקוח האידיאלי",
     desc: "כלי שעוזר לאתר ולמפות את הלקוחות האידיאליים (ICP) שלכם לפנייה ממוקדת.",
