@@ -101,9 +101,10 @@ export const TOOLS: Tool[] = [
   {
     id: "meeting-links",
     title: "לינק לפגישה",
-    desc: "3 מדריכים: Calendly, Notion Calendar, Google Appointments.",
+    desc: "3 מדריכים שלב-אחר-שלב ליצירת לינק שבו אנשים קובעים איתכם פגישה: Calendly, Google Appointments, Notion Calendar.",
+    href: "/tools/meeting-links",
     type: "static",
-    status: "soon",
+    status: "live",
   },
   {
     id: "content-partner",
