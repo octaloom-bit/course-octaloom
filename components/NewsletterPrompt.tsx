@@ -1,17 +1,25 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // One-time card after first login: "want the newsletter too?".
 // Hidden once the user is asked (publicMetadata.newsletterPrompted), so it never nags.
+// Exception: arriving with ?newsletter=1 (the button in the thank-you email) re-opens
+// the card even after a dismissal, so the email needs no opt-in mechanics of its own.
 export default function NewsletterPrompt() {
   const { isLoaded, isSignedIn, user } = useUser();
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState<"" | "in" | "skip">("");
+  const [fromEmail, setFromEmail] = useState(false);
+
+  useEffect(() => {
+    setFromEmail(new URLSearchParams(window.location.search).get("newsletter") === "1");
+  }, []);
 
   if (!isLoaded || !isSignedIn) return null;
-  if (user?.publicMetadata?.newsletterPrompted) return null;
+  if (user?.publicMetadata?.newsletter) return null;
+  if (user?.publicMetadata?.newsletterPrompted && !fromEmail) return null;
   if (done === "skip") return null;
 
   async function send(action: "subscribe" | "dismiss") {
