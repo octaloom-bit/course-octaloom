@@ -108,6 +108,15 @@ export const TOOLS: Tool[] = [
     status: "live",
   },
   {
+    id: "presence-score",
+    title: "LinkedIn Presence Score",
+    desc: "סריקת פרופיל של 3 דקות. ציון מתוך 100 ותובנות לפי מה שלמדתן בפרק 2: כותרת, About, באנר, תוכן ורשת.",
+    href: "https://www.octagoodies.com/linkedin-presence-score",
+    external: true,
+    type: "static",
+    status: "live",
+  },
+  {
     id: "content-partner",
     title: "שותף תוכן AI",
     desc: "Gem ייעודי שעוזר לבנות voice, לוח תוכן 30 יום, ופוסטים.",
