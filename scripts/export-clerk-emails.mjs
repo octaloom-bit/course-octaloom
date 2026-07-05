@@ -11,7 +11,7 @@ const root = resolve(here, "..");
 
 function loadKey() {
   if (process.env.CLERK_SECRET_KEY) return process.env.CLERK_SECRET_KEY;
-  for (const f of [".env.local", ".env.prod.local"]) {
+  for (const f of [".env.prod.local", ".env.local"]) {
     try {
       const txt = readFileSync(resolve(root, f), "utf8");
       const m = txt.match(/^CLERK_SECRET_KEY=(.+)$/m);
