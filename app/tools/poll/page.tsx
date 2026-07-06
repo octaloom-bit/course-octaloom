@@ -25,6 +25,13 @@ export default function PollPage() {
   const [remaining, setRemaining] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [copied, setCopied] = useState<string | null>(null);
+
+  function copyText(text: string, id: string) {
+    navigator.clipboard.writeText(text);
+    setCopied(id);
+    setTimeout(() => setCopied((c) => (c === id ? null : c)), 1600);
+  }
 
   function selectCategory(key: string) {
     setCategoryKey(key);
@@ -93,12 +100,21 @@ export default function PollPage() {
 
       <div className="card">
         <div className="step-label">שלב 1 · בחרו קטגוריה</div>
-        <div className="formula-grid">
+        <div className="formula-grid poll-grid">
           {Object.entries(POLL_CATEGORIES).map(([key, c]) => (
             <div
               key={key}
               className={`formula${categoryKey === key ? " active" : ""}`}
+              role="button"
+              tabIndex={0}
+              aria-pressed={categoryKey === key}
               onClick={() => selectCategory(key)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  selectCategory(key);
+                }
+              }}
             >
               <span className="formula-num" style={{ background: "var(--purple-soft)" }}>{c.icon}</span>
               <div className="formula-text">
@@ -175,8 +191,11 @@ export default function PollPage() {
                 <div className="poll" key={i}>
                   <div className="poll-head">
                     <span className="poll-num">סקר {i + 1}</span>
-                    <button className="copy" onClick={() => navigator.clipboard.writeText(formatPoll(p))}>
-                      העתיקו הכל
+                    <button
+                      className={`copy${copied === `poll-${i}` ? " done" : ""}`}
+                      onClick={() => copyText(formatPoll(p), `poll-${i}`)}
+                    >
+                      {copied === `poll-${i}` ? "הועתק ✓" : "העתיקו הכל"}
                     </button>
                   </div>
 
@@ -223,8 +242,11 @@ export default function PollPage() {
             <p>העתיקו את הפרומפט המלא ל-ChatGPT / Claude / Gemini שלכם, ותמשיכו לייצר סקרים בלי הגבלה:</p>
             <textarea readOnly value={handoffPrompt} />
             <div style={{ marginTop: 8 }}>
-              <button className="copy" onClick={() => navigator.clipboard.writeText(handoffPrompt)}>
-                העתקת הפרומפט
+              <button
+                className={`copy${copied === "handoff" ? " done" : ""}`}
+                onClick={() => copyText(handoffPrompt, "handoff")}
+              >
+                {copied === "handoff" ? "הועתק ✓" : "העתקת הפרומפט"}
               </button>
             </div>
           </div>
