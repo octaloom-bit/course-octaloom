@@ -9,7 +9,13 @@ export async function POST(request: Request) {
   const { userId } = await auth();
   if (!userId) return Response.json({ error: "unauthorized" }, { status: 401 });
 
-  let body: { type?: string; chapterId?: string; percent?: number; toolId?: string } = {};
+  let body: {
+    type?: string;
+    chapterId?: string;
+    percent?: number;
+    toolId?: string;
+    kind?: "open" | "use";
+  } = {};
   try {
     body = await request.json();
   } catch {
@@ -26,7 +32,7 @@ export async function POST(request: Request) {
     if (body.type === "video" && body.chapterId && typeof body.percent === "number") {
       await recordVideo(who, body.chapterId, body.percent);
     } else if (body.type === "tool" && body.toolId) {
-      await recordTool(who, body.toolId);
+      await recordTool(who, body.toolId, body.kind === "use" ? "use" : "open");
     } else {
       return Response.json({ error: "missing fields" }, { status: 400 });
     }

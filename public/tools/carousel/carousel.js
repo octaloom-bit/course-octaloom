@@ -115,7 +115,7 @@
 
   // Default branding ships with Hanita's demo identity, exactly like typegrow ships Alex's.
   var DEFAULT_BRANDING = {
-    name: 'Hanita Yudovski', handle: 'LinkedIn Led Marketer', photo: ASSET_BASE + 'hanita-li.jpg',
+    name: 'Hanita Yudovski', handle: 'Linkedin Led Fractional CMO', photo: ASSET_BASE + 'li-profile.png',
     showPhoto: true, showName: true, showHandle: true, introOutroOnly: false
   };
   var state = {
@@ -187,7 +187,7 @@
         state.branding = {
           name: String(d.branding.name || ''), handle: String(d.branding.handle || ''),
           // migrate drafts that still point at the removed first-version avatar
-          photo: (d.branding.photo === '/linkedin-carousel/hanita.jpg' || d.branding.photo === '/linkedin-carousel/hanita-li.jpg') ? DEFAULT_BRANDING.photo : (d.branding.photo || null),
+          photo: (d.branding.photo === '/linkedin-carousel/hanita.jpg' || d.branding.photo === '/linkedin-carousel/hanita-li.jpg' || d.branding.photo === '/tools/carousel/hanita-li.jpg') ? DEFAULT_BRANDING.photo : (d.branding.photo || null),
           introOutroOnly: !!d.branding.introOutroOnly,
           showPhoto: d.branding.showPhoto !== false,
           showName: d.branding.showName !== false,

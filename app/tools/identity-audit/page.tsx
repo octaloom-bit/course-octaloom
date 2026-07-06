@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { syncTool } from "@/lib/progress-sync";
 import { AUDIT_QUESTIONS } from "@/lib/plan";
 import LinkedInIcon from "@/components/LinkedInIcon";
 import ToolNote from "@/components/ToolNote";
@@ -53,6 +54,7 @@ export default function IdentityAuditPage() {
 
   function copy() {
     navigator.clipboard.writeText(buildText());
+    syncTool("identity-audit", "use");
     setSaved(true);
   }
 

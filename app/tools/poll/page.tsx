@@ -79,7 +79,7 @@ export default function PollPage() {
           מחולל <span className="accent">סקרים</span> ללינקדאין
         </h1>
         <p className="sub">
-          סקר חכם עושה יותר מלאסוף הצבעות. הוא מתחיל שיחה ומביא לידים. בחרו קטגוריה וטון, וקבלו 3 רעיונות מוכנים: שאלה, אופציות, פתיח לפוסט, ולמה זה עובד.
+          רוב הסקרים בלינקדאין הם בזבוז: שאלה גנרית, אפס תגובות. פה מייצרים סקר שפותח שיחה ומביא לידים. בוחרים קטגוריה וטון, ומקבלים 3 רעיונות מוכנים עם שאלה, אופציות, פתיח לפוסט ולמה זה עובד.
         </p>
       </div>
 
@@ -140,10 +140,10 @@ export default function PollPage() {
             onChange={(e) => setAudience(e.target.value)}
           />
           <div className="field-hint">
-            הכוונה ל-ICP שלך: הלקוחה האידיאלית שמשלמת לך, לא כלל העוקבים. ככל שממוקד יותר, הפולס מסנן טוב יותר את מי שיכולה להפוך ללקוחה.
+            זה ה-ICP שלכם: הלקוחה שמשלמת, לא כל מי שעוקב. ככל שתדייקו פה, הסקר יסנן טוב יותר בדיוק את מי שיכולה להפוך ללקוחה.
           </div>
 
-          <label>שפת הפולסים</label>
+          <label>שפת הסקרים</label>
           <select value={lang} onChange={(e) => setLang(e.target.value as Lang)}>
             <option value="עברית">עברית</option>
             <option value="אנגלית">אנגלית</option>
@@ -219,8 +219,8 @@ export default function PollPage() {
       {handoffPrompt && (
         <div className="card">
           <div className="handoff">
-            <h3>הגעת ל-3 ייצורים 🎯</h3>
-            <p>העתיקו את הפרומפט המלא ל-ChatGPT / Claude / Gemini שלכם, והמשיכו לייצר סקרים בלי הגבלה:</p>
+            <h3>נגמרו 3 הייצורים להיום 🎯</h3>
+            <p>העתיקו את הפרומפט המלא ל-ChatGPT / Claude / Gemini שלכם, ותמשיכו לייצר סקרים בלי הגבלה:</p>
             <textarea readOnly value={handoffPrompt} />
             <div style={{ marginTop: 8 }}>
               <button className="copy" onClick={() => navigator.clipboard.writeText(handoffPrompt)}>

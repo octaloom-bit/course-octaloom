@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { syncTool, currentToolId } from "@/lib/progress-sync";
 
 // Reusable prompt card: style title + short tag, a copy button in the header,
 // and the ready-to-copy prompt body (dir="auto" so English aligns LTR).
@@ -17,6 +18,8 @@ export default function PromptCard({
 
   function copy() {
     navigator.clipboard.writeText(body);
+    const tool = currentToolId();
+    if (tool) syncTool(tool, "use");
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1500);
   }

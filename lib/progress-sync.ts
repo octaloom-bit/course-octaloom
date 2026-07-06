@@ -20,6 +20,13 @@ export function syncVideo(chapterId: string, percent: number, force = false) {
   post({ type: "video", chapterId, percent: Math.round(percent) });
 }
 
-export function syncTool(toolId: string) {
-  post({ type: "tool", toolId });
+export function syncTool(toolId: string, kind: "open" | "use" = "open") {
+  post({ type: "tool", toolId, kind });
+}
+
+// Derive the current tool id from the URL (/tools/<id>). Returns null elsewhere.
+export function currentToolId(): string | null {
+  if (typeof window === "undefined") return null;
+  const m = window.location.pathname.match(/^\/tools\/([^/]+)/);
+  return m ? m[1] : null;
 }

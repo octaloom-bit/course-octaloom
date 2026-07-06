@@ -21,6 +21,17 @@ export default function ConnectionsPage() {
         <p className="sub" style={{ maxWidth: "60ch" }}>{CONNECTIONS_INTRO}</p>
       </div>
 
+      <ConnectionGenerator />
+
+      <div className="section-head">
+        <h2>ספריית התבניות (למילוי ידני)</h2>
+      </div>
+      <ConnectionTemplates />
+
+      <div className="section-head">
+        <h2>שיטת העבודה</h2>
+      </div>
+
       <div className="pro-note">
         <span className="tool-note-icon" aria-hidden>💡</span>
         <div>
@@ -47,13 +58,6 @@ export default function ConnectionsPage() {
           ))}
         </ol>
       </div>
-
-      <ConnectionGenerator />
-
-      <div className="section-head">
-        <h2>או ידנית: ספריית התבניות</h2>
-      </div>
-      <ConnectionTemplates />
 
       <ToolNote />
     </div>

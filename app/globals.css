@@ -488,3 +488,9 @@ a.auth-btn{text-decoration:none;display:inline-flex;align-items:center}
 .pc-none{color:var(--muted)}
 .tools-cell{text-align:right !important;white-space:normal !important;max-width:280px}
 .tool-chip{display:inline-block;background:var(--purple-soft);color:var(--purple);border-radius:100px;padding:3px 10px;font-size:12px;margin:2px}
+
+.admin-note{font-size:13px;color:var(--muted);margin:0 0 12px}
+.signup-date{font-size:13px;color:var(--muted);white-space:nowrap}
+.no-access-tag{display:inline-block;margin-inline-start:8px;font-size:11px;color:#B3261E;background:#FCE8E6;border-radius:100px;padding:2px 8px}
+.tool-chip.used{background:var(--purple);color:#fff}
+.tool-chip.opened{background:transparent;color:var(--muted);border:1px solid var(--line)}

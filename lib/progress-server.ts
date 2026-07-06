@@ -4,16 +4,25 @@ import { getKv } from "@/lib/kv";
 // progressed where. Keyed by Clerk userId; email/name are denormalized in for
 // the admin view. Video percent is monotonic (max); tool usage is a counter.
 
-export type ToolUse = { count: number; lastAt: string };
+export type ToolUse = { opens: number; uses: number; lastAt: string };
 
 export type UserProgress = {
   userId: string;
   email: string;
   name?: string;
   videos: Record<string, number>; // chapterId -> percent (0..100)
-  tools: Record<string, ToolUse>; // toolId -> usage
+  tools: Record<string, ToolUse>; // toolId -> { opened link, actually used }
   updatedAt: string;
 };
+
+// Old records stored { count } (opens only). Normalize on read.
+export function normalizeToolUse(t: Partial<ToolUse> & { count?: number }): ToolUse {
+  return {
+    opens: t.opens ?? t.count ?? 0,
+    uses: t.uses ?? 0,
+    lastAt: t.lastAt ?? "",
+  };
+}
 
 const USERS = "progress:users";
 const key = (userId: string) => `progress:${userId}`;
@@ -44,14 +53,19 @@ export async function recordVideo(
 
 export async function recordTool(
   user: { id: string; email: string; name?: string },
-  toolId: string
+  toolId: string,
+  kind: "open" | "use" = "open"
 ) {
   const kv = getKv();
   const rec = (await read(user.id)) || empty(user.id, user.email, user.name);
   rec.email = user.email;
   if (user.name) rec.name = user.name;
-  const prev = rec.tools[toolId];
-  rec.tools[toolId] = { count: (prev?.count || 0) + 1, lastAt: new Date().toISOString() };
+  const prev = normalizeToolUse(rec.tools[toolId] || {});
+  rec.tools[toolId] = {
+    opens: prev.opens + (kind === "open" ? 1 : 0),
+    uses: prev.uses + (kind === "use" ? 1 : 0),
+    lastAt: new Date().toISOString(),
+  };
   rec.updatedAt = new Date().toISOString();
   await kv.set(key(user.id), rec);
   await kv.sadd(USERS, user.id);

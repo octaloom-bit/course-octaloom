@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { buildPrompt, parseVariations, type Lang } from "@/lib/formulas";
 import { checkAndIncrement, MAX_GEN } from "@/lib/ratelimit";
+import { recordTool } from "@/lib/progress-server";
 
 const MODEL = "gemini-2.5-flash";
 
@@ -59,6 +60,8 @@ export async function POST(request: Request) {
       return Response.json({ error: "תשובה ריקה מ-Gemini" }, { status: 502 });
     }
     const variations = parseVariations(text);
+    // Real usage signal for the admin dashboard (email is filled in there from Clerk).
+    recordTool({ id: userId, email: "" }, "headline", "use").catch(() => {});
     // Include the prompt on the last free attempt so the UI can offer the handoff next.
     return Response.json({
       variations,

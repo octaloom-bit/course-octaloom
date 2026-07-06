@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { syncTool, currentToolId } from "@/lib/progress-sync";
 import {
   SCENARIOS,
   getScenario,
@@ -38,6 +39,8 @@ export default function ConnectionGenerator() {
 
   function copyVariation(text: string, i: number) {
     navigator.clipboard.writeText(text);
+    const tool = currentToolId();
+    if (tool) syncTool(tool, "use");
     setCopiedIdx(i);
     window.setTimeout(() => setCopiedIdx(null), 1500);
   }

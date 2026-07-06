@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { syncTool } from "@/lib/progress-sync";
 import { PLAN, type PlanItem } from "@/lib/plan";
 import LinkedInIcon from "@/components/LinkedInIcon";
 import ToolNote from "@/components/ToolNote";
@@ -124,6 +125,7 @@ export default function WeeklyPlanPage() {
 
   function copyAll() {
     navigator.clipboard.writeText(sectionText(false));
+    syncTool("weekly-plan", "use");
   }
 
   function emailOpen() {
