@@ -12,6 +12,11 @@
   (function pruneModeCopy() {
     var drop = document.querySelectorAll(AI_ENABLED ? '[data-noai-only]' : '[data-ai-only]');
     for (var i = 0; i < drop.length; i++) drop[i].parentNode.removeChild(drop[i]);
+    // The cheap-model disclaimer only shows where a budget model runs (free/Groq site).
+    if (!CFG.modelDisclaimer) {
+      var d = document.querySelectorAll('[data-disclaimer]');
+      for (var j = 0; j < d.length; j++) d[j].parentNode.removeChild(d[j]);
+    }
   })();
 
   /* =========================================================
@@ -57,12 +62,12 @@
     { id: 'wine',      name: 'Wine',      bg: '#4C0F2E', text: '#FBEFF4', accent: '#F9A8D4' },
     { id: 'sand',      name: 'Sand',      bg: '#F5EFE6', text: '#3E3A33', accent: '#C2410C' },
     { id: 'paper',     name: 'Paper',     bg: '#FAFAF8', text: '#1F2933', accent: '#2563EB' },
-    { id: 'clean',     name: 'Clean',     bg: '#FFFFFF', text: '#18181B', accent: '#E11D48' }
+    { id: 'clean',     name: 'Clean',     bg: '#FFFFFF', text: '#18181B', accent: '#712EAC' }
   ];
   var FONTS = [
+    { id: 'assistant', name: 'Assistant',   stack: "'Assistant','Arial',sans-serif" },
     { id: 'heebo',     name: 'Heebo',       stack: "'Heebo','Arial',sans-serif" },
     { id: 'rubik',     name: 'Rubik',       stack: "'Rubik','Arial',sans-serif" },
-    { id: 'assistant', name: 'Assistant',   stack: "'Assistant','Arial',sans-serif" },
     { id: 'secular',   name: 'Secular One', stack: "'Secular One','Arial',sans-serif" }
   ];
   var ERROR_MSGS = {
@@ -120,7 +125,7 @@
     firstComment: '',
     architecture: '',
     branding: JSON.parse(JSON.stringify(DEFAULT_BRANDING)),
-    design: { paletteId: 'midnight', fontId: 'heebo', custom: { bg: '#0F172A', text: '#F8FAFC', accent: '#7DD3FC' } },
+    design: { paletteId: 'midnight', fontId: 'assistant', custom: { bg: '#0F172A', text: '#F8FAFC', accent: '#7DD3FC' } },
     settings: { numbers: true, swipe: true, swipeTextHe: DEFAULT_SWIPE.he, swipeTextEn: DEFAULT_SWIPE.en }
   };
   var uid = 1;
@@ -197,7 +202,7 @@
       if (d.design && d.design.paletteId) state.design = {
         // old drafts may reference retired brand palettes; currentPalette() falls back to the first public one
         paletteId: d.design.paletteId,
-        fontId: d.design.fontId || 'heebo',
+        fontId: d.design.fontId || 'assistant',
         custom: d.design.custom || state.design.custom
       };
       if (d.settings) state.settings = {
