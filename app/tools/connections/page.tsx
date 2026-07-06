@@ -1,6 +1,7 @@
 import Link from "next/link";
 import LinkedInIcon from "@/components/LinkedInIcon";
 import ConnectionTemplates from "@/components/ConnectionTemplates";
+import ConnectionGenerator from "@/components/ConnectionGenerator";
 import ToolNote from "@/components/ToolNote";
 import { CONNECTIONS_INTRO, RULES_LEAD, BASE_RULES, SEQUENCE, PRO_BONUS } from "@/content/connections";
 
@@ -15,7 +16,7 @@ export default function ConnectionsPage() {
           כלי עזר לקורס
         </span>
         <h1 style={{ maxWidth: "none" }}>
-          תבניות <span className="accent">הודעות חיבור</span>
+          מחולל <span className="accent">הודעות חיבור</span>
         </h1>
         <p className="sub" style={{ maxWidth: "60ch" }}>{CONNECTIONS_INTRO}</p>
       </div>
@@ -47,6 +48,11 @@ export default function ConnectionsPage() {
         </ol>
       </div>
 
+      <ConnectionGenerator />
+
+      <div className="section-head">
+        <h2>או ידנית: ספריית התבניות</h2>
+      </div>
       <ConnectionTemplates />
 
       <ToolNote />
