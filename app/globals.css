@@ -356,6 +356,30 @@ button{font-family:inherit;cursor:pointer;border:none;border-radius:999px;font-w
 .handoff textarea{min-height:160px;font-size:12.5px;background:var(--white)}
 .note{font-size:12px;color:var(--muted);margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
 
+/* ---------- poll generator ---------- */
+.field-hint{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5;background:var(--purple-soft);
+  border-radius:12px;padding:9px 12px}
+.poll{background:#fafafa;border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:14px}
+.poll-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.poll-num{font-family:var(--font-aeonik);font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;
+  color:var(--purple);background:var(--purple-soft);padding:4px 10px;border-radius:999px}
+.poll-q{font-size:16px;font-weight:500;line-height:1.4;color:var(--ink);display:flex;align-items:baseline;
+  justify-content:space-between;gap:12px;flex-wrap:wrap}
+.poll-q .chars{font-family:var(--font-aeonik);font-size:11px;white-space:nowrap}
+.poll-q .chars.ok{color:var(--purple)}
+.poll-q .chars.over{color:#c0392b}
+.poll-opts{margin:12px 0 4px;display:flex;flex-direction:column;gap:7px}
+.poll-opt{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--white);
+  border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+.poll-opt-txt{font-size:14px;color:var(--ink)}
+.poll-opt .chars{font-family:var(--font-aeonik);font-size:10.5px;white-space:nowrap}
+.poll-opt .chars.ok{color:var(--muted)}
+.poll-opt .chars.over{color:#c0392b}
+.poll-opener,.poll-why{font-size:13px;line-height:1.55;color:var(--ink);margin-top:10px}
+.poll-why{color:var(--muted)}
+.poll-meta-label{display:block;font-family:var(--font-aeonik);font-size:10px;font-weight:700;letter-spacing:.5px;
+  text-transform:uppercase;color:var(--purple);margin-bottom:3px}
+
 /* ---------- footer ---------- */
 .footer{background:var(--blackhole);color:var(--natural);margin-top:auto}
 .footer .inner{max-width:1040px;margin:0 auto;padding:48px 24px 26px;
