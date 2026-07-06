@@ -115,7 +115,7 @@
 
   // Default branding ships with Hanita's demo identity, exactly like typegrow ships Alex's.
   var DEFAULT_BRANDING = {
-    name: 'Hanita Yudovski', handle: 'Linkedin Led Fractional CMO', photo: ASSET_BASE + 'li-profile.png',
+    name: 'Hanita Yudovski', handle: 'LinkedIn Led Marketer', photo: ASSET_BASE + 'hanita-li.jpg',
     showPhoto: true, showName: true, showHandle: true, introOutroOnly: false
   };
   var state = {
@@ -187,7 +187,7 @@
         state.branding = {
           name: String(d.branding.name || ''), handle: String(d.branding.handle || ''),
           // migrate drafts that still point at the removed first-version avatar
-          photo: (d.branding.photo === '/linkedin-carousel/hanita.jpg' || d.branding.photo === '/linkedin-carousel/hanita-li.jpg' || d.branding.photo === '/tools/carousel/hanita-li.jpg') ? DEFAULT_BRANDING.photo : (d.branding.photo || null),
+          photo: (d.branding.photo === '/linkedin-carousel/hanita.jpg' || d.branding.photo === '/linkedin-carousel/hanita-li.jpg') ? DEFAULT_BRANDING.photo : (d.branding.photo || null),
           introOutroOnly: !!d.branding.introOutroOnly,
           showPhoto: d.branding.showPhoto !== false,
           showName: d.branding.showName !== false,
@@ -777,6 +777,8 @@
     e.preventDefault();
     var email = document.getElementById('gate-email').value.trim();
     var name = document.getElementById('gate-name').value.trim();
+    var consentEl = document.getElementById('gate-consent');
+    var consent = !!(consentEl && consentEl.checked);
     if (!email) return;
     var btn = this.querySelector('button[type="submit"]');
     btn.disabled = true;
@@ -784,7 +786,7 @@
       await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ source: 'linkedin-carousel', name: name, email: email, lang: uiLang() })
+        body: JSON.stringify({ source: 'linkedin-carousel', name: name, email: email, lang: uiLang(), consent: consent })
       });
     } catch (err) { /* soft gate — never block the download */ }
     try { localStorage.setItem(GATE_KEY, '1'); } catch (err) {}

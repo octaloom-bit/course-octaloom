@@ -40,12 +40,8 @@
       --blackhole: #201E4B;
       --natural:   #ECE9E7;
       --white:     #FFFFFF;
-      --purple-tint: #F3EDFA;
-      --purple-soft: #F3EDFA;
-      --green-tint:  #EEF6E2;
-      --muted: rgba(32,30,75,.58);
-      --line: rgba(32,30,75,.10);
-      --radius: 20px;
+      --purple-tint: #f3e8fc;
+      --green-tint:  #e8f5d8;
       --shadow-sm: rgba(32,30,75,0.09) 0px 2px 8px;
       --shadow-md: rgba(32,30,75,0.12) 0px 6px 20px;
       --max-w: 1080px;
@@ -54,12 +50,6 @@
     /* ===== DATA-LANG TOGGLE (UI language) ===== */
     .lang-he [data-lang="en"] { display: none; }
     .lang-en [data-lang="he"] { display: none; }
-
-    /* ===== A11Y: visible keyboard focus on all interactive controls ===== */
-    button:focus-visible, a:focus-visible, input:focus-visible,
-    select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
-      outline: 2px solid var(--purple); outline-offset: 2px;
-    }
 
     /* ===== BASE ===== */
     /* Free, redistributable fonts (OFL) for user carousels — the brand fonts above stay UI/demo-only */
@@ -393,23 +383,6 @@
 
     /* ===== PREVIEW ===== */
     .preview-col { min-width: 0; }
-    /* Frame the preview like a real LinkedIn document post */
-    .li-post {
-      background: var(--white); border: 1.5px solid var(--line);
-      border-radius: 16px; box-shadow: var(--shadow-md); padding: 14px 14px 6px;
-      margin-bottom: 16px;
-    }
-    .li-reactions {
-      display: flex; align-items: center; gap: 8px;
-      padding: 12px 6px 8px; margin-top: 6px; border-top: 1px solid var(--line);
-      color: var(--muted); font-size: 13px;
-    }
-    .li-react-icons { display: inline-flex; align-items: center; }
-    .li-react-icons img {
-      width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--white);
-      margin-inline-start: -5px; box-shadow: 0 1px 2px rgba(32,30,75,.15);
-    }
-    .li-react-icons img:first-child { margin-inline-start: 0; }
     .preview-strip {
       display: flex; gap: 16px; overflow-x: auto; padding: 8px 4px 16px;
       scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
@@ -542,7 +515,7 @@
     .sl-author { min-width: 0; }
     .sl-author-name { font-size: 32px; font-weight: 700; margin: 0; line-height: 1.25; }
     .slide-brandfont.slide-he .sl-author-name { font-weight: 500; }
-    .sl-author-handle { font-size: 26px; margin: 2px 0 0; opacity: .6; line-height: 1.25; unicode-bidi: plaintext; }
+    .sl-author-handle { font-size: 26px; margin: 2px 0 0; opacity: .6; line-height: 1.25; direction: ltr; unicode-bidi: isolate; }
     .slide-brandfont .sl-author-handle, .slide-brandfont .sl-num { font-family: 'Aeonik','Arial',sans-serif; }
     .sl-swipe {
       margin-inline-start: auto; font-size: 28px; font-weight: 600;
@@ -571,16 +544,16 @@
     /* ===== DOWNLOAD BAR ===== */
     .dl-bar {
       display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
-      background: var(--white); border: 1.5px solid var(--line);
-      border-radius: 20px; padding: 22px 26px; margin-top: 18px; box-shadow: var(--shadow-md);
+      background: var(--white); border: 1.5px solid rgba(32,30,75,.10);
+      border-radius: 16px; padding: 18px 22px; margin-top: 18px; box-shadow: var(--shadow-sm);
     }
     .dl-btn {
-      background: var(--purple); color: var(--white); border: none;
-      border-radius: 999px; padding: 14px 32px; font-size: 15.5px; font-weight: 600;
-      cursor: pointer; transition: filter .18s, transform .15s;
+      background: var(--blackhole); color: var(--white); border: none;
+      border-radius: 10px; padding: 14px 30px; font-size: 15.5px; font-weight: 600;
+      cursor: pointer; transition: opacity .18s, transform .15s;
       display: inline-flex; align-items: center; gap: 9px;
     }
-    .dl-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    .dl-btn:hover { opacity: .9; transform: translateY(-1px); }
     .dl-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
     .dl-progress { font-size: 14px; color: rgba(32,30,75,.55); margin: 0; }
     .dl-note { font-size: 12.5px; color: rgba(32,30,75,.4); margin: 0; flex-basis: 100%; }
@@ -610,6 +583,15 @@
       padding: 12px 15px; font-size: 15px; color: var(--blackhole); outline: none;
     }
     .modal input:focus { border-color: var(--purple); }
+    .gate-consent {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 12.5px; line-height: 1.5; color: rgba(32,30,75,.62);
+      text-align: start; cursor: pointer;
+    }
+    .gate-consent input[type="checkbox"] {
+      width: 17px; height: 17px; margin: 1px 0 0; flex-shrink: 0;
+      accent-color: var(--purple); cursor: pointer;
+    }
     .modal .gen-btn { width: 100%; }
     .modal-privacy { font-size: 11.5px; color: rgba(32,30,75,.4); margin: 4px 0 0 !important; text-align: center; }
 
