@@ -118,7 +118,13 @@ export default function PollPage() {
         </p>
       </div>
 
-      <div className="steps">
+      <div className="gen">
+        <div className="gen-hero">
+          <span className="gen-eyebrow">מחולל AI · פרק 3</span>
+          <h2>סקר שפותח שיחה, בשלושה צעדים</h2>
+        </div>
+
+        <div className="steps">
         <div className="step"><span className="step-num">1</span> בחרו קטגוריה</div>
         <div className="step-arrow">←</div>
         <div className="step"><span className="step-num">2</span> טון והקשר</div>
@@ -280,6 +286,7 @@ export default function PollPage() {
           </div>
         </div>
       )}
+      </div>
 
       <ToolNote />
     </div>

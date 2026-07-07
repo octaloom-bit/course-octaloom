@@ -33,7 +33,12 @@ export default function ConnectionsPage() {
       </div>
 
       <div className="pro-note">
-        <span className="tool-note-icon" aria-hidden>💡</span>
+        <span className="tool-note-icon" aria-hidden>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+            <path d="m12 4 1.8 4.4 4.2 1.8-4.2 1.8L12 16.5l-1.8-4.5L6 10.2l4.2-1.8z" />
+            <path d="m18.6 15.4.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" />
+          </svg>
+        </span>
         <div>
           <strong>בונוס של מקצוענים</strong>
           <p>{PRO_BONUS}</p>

@@ -91,7 +91,7 @@ export default function ConnectionGenerator() {
   return (
     <div className="gen">
       <div className="gen-hero">
-        <span className="gen-eyebrow">✦ מחולל AI</span>
+        <span className="gen-eyebrow">מחולל AI · פרק 4</span>
         <h2>נסחו הודעה שלא נשמעת גנרית</h2>
         <p>
           בוחרים תרחיש, מדביקים פוסט של הפרוספקט, ומקבלים 3 וריאציות שכל אחת נאחזת בפרט אמיתי מהתוכן שלו.
@@ -212,7 +212,7 @@ export default function ConnectionGenerator() {
       {handoffPrompt && (
         <div className="card">
           <div className="handoff">
-            <h3>הגעת ל-3 ייצורים 🎯</h3>
+            <h3>הגעת ל-3 ייצורים להיום</h3>
             <p>העתיקו את הפרומפט המלא ל-ChatGPT / Claude / Gemini שלכם, והמשיכו לייצר שם בלי הגבלה:</p>
             <textarea readOnly value={handoffPrompt} />
             <div style={{ marginTop: 8 }}>

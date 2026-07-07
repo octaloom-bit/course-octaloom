@@ -6,10 +6,23 @@ import { FORMULAS, type Lang } from "@/lib/formulas";
 import LinkedInIcon from "@/components/LinkedInIcon";
 import ToolNote from "@/components/ToolNote";
 
-const FORMULA_META: Record<string, { num: number; icon: string; tag: string }> = {
-  objection: { num: 1, icon: "🛡️", tag: "כשיש התנגדות חוזרת" },
-  positioning: { num: 2, icon: "✦", tag: "כשיש זווית ייחודית" },
-  offer: { num: 3, icon: "🎯", tag: "כשיש תהליך ותוצאה" },
+// Line icons per formula (feather-style stroke), keyed by formula id. Replaces emoji.
+const FORMULA_ICONS: Record<string, React.ReactElement> = {
+  objection: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6z" /><path d="m9.5 12 2 2 3.5-3.5" /></svg>
+  ),
+  positioning: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="m15 9-2 5-4 1 2-5z" /></svg>
+  ),
+  offer: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1.4" /></svg>
+  ),
+};
+
+const FORMULA_TAGS: Record<string, string> = {
+  objection: "כשיש התנגדות חוזרת",
+  positioning: "כשיש זווית ייחודית",
+  offer: "כשיש תהליך ותוצאה",
 };
 
 export default function HeadlinePage() {
@@ -80,30 +93,35 @@ export default function HeadlinePage() {
         </p>
       </div>
 
-      <div className="steps">
-        <div className="step"><span className="step-num">1</span> בחרו נוסחה</div>
-        <div className="step-arrow">←</div>
-        <div className="step"><span className="step-num">2</span> מלאו שאלון</div>
-        <div className="step-arrow">←</div>
-        <div className="step"><span className="step-num">3</span> קבלו 5 כותרות</div>
-      </div>
+      <div className="gen">
+        <div className="gen-hero">
+          <span className="gen-eyebrow">מחולל AI · פרק 2</span>
+          <h2>מנוסחה לכותרת מוכנה, בשלושה צעדים</h2>
+        </div>
+
+        <div className="steps">
+          <div className="step"><span className="step-num">1</span> בחרו נוסחה</div>
+          <div className="step-arrow">←</div>
+          <div className="step"><span className="step-num">2</span> מלאו שאלון</div>
+          <div className="step-arrow">←</div>
+          <div className="step"><span className="step-num">3</span> קבלו 5 כותרות</div>
+        </div>
 
       <div className="card">
         <div className="step-label">שלב 1 · בחרו נוסחה</div>
         <div className="formula-grid">
           {Object.entries(FORMULAS).map(([key, f]) => {
-            const meta = FORMULA_META[key];
             return (
               <div
                 key={key}
                 className={`formula formula-${key}${formulaKey === key ? " active" : ""}`}
                 onClick={() => selectFormula(key)}
               >
-                <span className="formula-num">{meta.icon}</span>
+                <span className="formula-num poll-icon">{FORMULA_ICONS[key]}</span>
                 <div className="formula-text">
                   <div className="formula-top">
                     <h3>{f.name}</h3>
-                    <span className="formula-tag">{meta.tag}</span>
+                    <span className="formula-tag">{FORMULA_TAGS[key]}</span>
                   </div>
                   <p>{f.structure}</p>
                 </div>
@@ -175,7 +193,7 @@ export default function HeadlinePage() {
       {handoffPrompt && (
         <div className="card">
           <div className="handoff">
-            <h3>הגעת ל-3 ייצורים 🎯</h3>
+            <h3>הגעת ל-3 ייצורים להיום</h3>
             <p>העתיקו את הפרומפט המלא ל-ChatGPT / Claude / Gemini שלכם, והמשיכו לשחק איתו שם בלי הגבלה:</p>
             <textarea readOnly value={handoffPrompt} />
             <div style={{ marginTop: 8 }}>
@@ -186,6 +204,7 @@ export default function HeadlinePage() {
           </div>
         </div>
       )}
+      </div>
 
       <ToolNote />
     </div>

@@ -155,68 +155,44 @@ export default function WeeklyPlanPage() {
         </p>
       </div>
 
-      <div className="card">
-        <div className="step-label">ההתקדמות שלי</div>
-        <div className="counter" style={{ marginTop: 0, fontSize: 14 }}>
-          {doneCount}/{allItems.length} משימות הושלמו
+      <div className="wp-progress">
+        <div className="cp-head">
+          <span>ההתקדמות שלי</span>
+          <span className="cp-pct">{doneCount}/{allItems.length}</span>
         </div>
-        <div
-          style={{
-            height: 8,
-            background: "var(--line)",
-            borderRadius: 999,
-            overflow: "hidden",
-            marginTop: 10,
-          }}
-        >
+        <div className="cp-bar">
           <div
-            style={{
-              height: "100%",
-              width: `${allItems.length ? (doneCount / allItems.length) * 100 : 0}%`,
-              background: "var(--purple)",
-              transition: "width .2s",
-            }}
+            className="cp-fill"
+            style={{ width: `${allItems.length ? (doneCount / allItems.length) * 100 : 0}%` }}
           />
         </div>
-        <div style={{ display: "flex", gap: 8, marginTop: 14, flexWrap: "wrap" }}>
+        <div className="wp-actions">
           <button className="copy" onClick={copyAll}>העתקת התוכנית</button>
           <button className="copy" onClick={emailOpen}>שליחת המשימות שנשארו למייל</button>
         </div>
       </div>
 
-      {PLAN.map((section) => (
-        <div className="card" key={section.id}>
-          <div className="step-label">{section.title}</div>
-          <p className="sub" style={{ marginTop: -6, marginBottom: 14 }}>{section.meta}</p>
-          <div>
+      {PLAN.map((section, si) => (
+        <section className="wp-section" key={section.id}>
+          <div className="wp-head">
+            <span className="wp-num">{String(si + 1).padStart(2, "0")}</span>
+            <div>
+              <h2>{section.title}</h2>
+              <p>{section.meta}</p>
+            </div>
+          </div>
+          <div className="wp-items">
             {section.items.map((it) => {
               const on = !!checked[it.id];
               return (
-                <label
-                  key={it.id}
-                  style={{
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: 10,
-                    margin: "10px 0",
-                    cursor: "pointer",
-                    fontWeight: 400,
-                    color: on ? "var(--muted)" : "var(--ink)",
-                    textDecoration: on ? "line-through" : "none",
-                  }}
-                >
-                  <input
-                    type="checkbox"
-                    checked={on}
-                    onChange={() => toggle(it.id)}
-                    style={{ width: 18, height: 18, marginTop: 2, accentColor: "var(--green)", flexShrink: 0 }}
-                  />
+                <label key={it.id} className={`wp-item${on ? " done" : ""}`}>
+                  <input type="checkbox" checked={on} onChange={() => toggle(it.id)} />
                   <span>{renderItem(it)}</span>
                 </label>
               );
             })}
           </div>
-        </div>
+        </section>
       ))}
 
       <ToolNote />
