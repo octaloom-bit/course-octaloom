@@ -17,7 +17,7 @@ const TONES: Tone[] = ["ציני", "חם", "פרובוקטיבי"];
 // Line icons per category (feather-style), keyed by category id. Replaces emoji.
 const ICONS: Record<string, React.ReactElement> = {
   uncommon: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2s4 4 4 8a4 4 0 0 1-8 0c0-1.5.7-2.8 1.4-3.6" /><path d="M12 22a6 6 0 0 0 6-6c0-1.6-.6-2.9-1.4-4" /></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M4 6a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H9l-5 4z" /><path d="M12 6.5V11M12 13.5h.01" /></svg>
   ),
   aireality: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="7" y="7" width="10" height="10" rx="2" /><path d="M10 3v2M14 3v2M10 19v2M14 19v2M3 10h2M3 14h2M19 10h2M19 14h2" /></svg>
@@ -32,7 +32,7 @@ const ICONS: Record<string, React.ReactElement> = {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1.4" /></svg>
   ),
   leadmagnet: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M6 3v8a6 6 0 0 0 12 0V3" /><path d="M6 3H3v8M18 3h3v8" /><path d="M6 15v3M18 15v3" /></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="9" width="16" height="11" rx="1.5" /><path d="M12 9v11M4 13.5h16" /><path d="M12 9c-1.2-2.8-5.2-2.4-4.4.4.5 1.6 2.9 1.6 4.4 1.6 1.5 0 3.9 0 4.4-1.6.8-2.8-3.2-3.2-4.4-.4Z" /></svg>
   ),
   howi: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-2.5Z" /></svg>
