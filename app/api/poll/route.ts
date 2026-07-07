@@ -66,7 +66,16 @@ export async function POST(request: Request) {
         headers: { "Content-Type": "application/json", "x-goog-api-key": key },
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { maxOutputTokens: 2048, temperature: 0.8 },
+          generationConfig: {
+            maxOutputTokens: 4096,
+            temperature: 0.8,
+            // Force valid JSON so parsing is reliable.
+            responseMimeType: "application/json",
+            // gemini-2.5-flash is a thinking model; thinking tokens eat the output
+            // budget and can leave the text empty/truncated. Turn thinking off for
+            // this structured extraction task.
+            thinkingConfig: { thinkingBudget: 0 },
+          },
         }),
       }
     );
@@ -75,7 +84,9 @@ export async function POST(request: Request) {
       return Response.json({ error: `gemini ${r.status}: ${t.slice(0, 150)}` }, { status: 502 });
     }
     const d = await r.json();
-    const text: string = d?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+    // Join every text part (a thinking model can split the answer across parts).
+    const parts: Array<{ text?: string }> = d?.candidates?.[0]?.content?.parts ?? [];
+    const text: string = parts.map((p) => p?.text || "").join("").trim();
     if (!text) {
       return Response.json({ error: "תשובה ריקה מ-Gemini" }, { status: 502 });
     }
