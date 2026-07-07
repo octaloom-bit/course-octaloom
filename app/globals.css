@@ -383,6 +383,8 @@ button{font-family:inherit;cursor:pointer;border:none;border-radius:999px;font-w
 /* Category grid: 2 columns on desktop, single column on narrow screens */
 .poll-grid{grid-template-columns:repeat(2,1fr);align-items:stretch}
 .poll-grid .formula{align-items:flex-start}
+.poll-icon{background:var(--purple-soft);color:var(--purple)}
+.poll-icon svg{width:24px;height:24px}
 @media(max-width:600px){.poll-grid{grid-template-columns:1fr}}
 /* Each generated poll reads like a LinkedIn post card: white, lifted, scannable */
 .poll{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:14px;

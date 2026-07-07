@@ -12,11 +12,39 @@ import {
 import LinkedInIcon from "@/components/LinkedInIcon";
 import ToolNote from "@/components/ToolNote";
 
-const TONES: Tone[] = ["צינית", "חמה", "פרובוקטיבית"];
+const TONES: Tone[] = ["ציני", "חם", "פרובוקטיבי"];
+
+// Line icons per category (feather-style), keyed by category id. Replaces emoji.
+const ICONS: Record<string, React.ReactElement> = {
+  uncommon: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2s4 4 4 8a4 4 0 0 1-8 0c0-1.5.7-2.8 1.4-3.6" /><path d="M12 22a6 6 0 0 0 6-6c0-1.6-.6-2.9-1.4-4" /></svg>
+  ),
+  aireality: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="7" y="7" width="10" height="10" rx="2" /><path d="M10 3v2M14 3v2M10 19v2M14 19v2M3 10h2M3 14h2M19 10h2M19 14h2" /></svg>
+  ),
+  thisorthat: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M12 4v16" /><path d="M6 7 3 13h6zM18 7l-3 6h6z" /><path d="M6 7h12" /></svg>
+  ),
+  mistake: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M10.3 4 2.7 17a2 2 0 0 0 1.7 3h15.2a2 2 0 0 0 1.7-3L13.7 4a2 2 0 0 0-3.4 0Z" /><path d="M12 9v4M12 17h.01" /></svg>
+  ),
+  icp: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1.4" /></svg>
+  ),
+  leadmagnet: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M6 3v8a6 6 0 0 0 12 0V3" /><path d="M6 3H3v8M18 3h3v8" /><path d="M6 15v3M18 15v3" /></svg>
+  ),
+  howi: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-2.5Z" /></svg>
+  ),
+  trend: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M3 17l6-6 4 4 8-8" /><path d="M17 7h4v4" /></svg>
+  ),
+};
 
 export default function PollPage() {
   const [categoryKey, setCategoryKey] = useState<string | null>(null);
-  const [tone, setTone] = useState<Tone>("חמה");
+  const [tone, setTone] = useState<Tone>("חם");
   const [niche, setNiche] = useState("");
   const [audience, setAudience] = useState("");
   const [lang, setLang] = useState<Lang>("עברית");
@@ -116,7 +144,7 @@ export default function PollPage() {
                 }
               }}
             >
-              <span className="formula-num" style={{ background: "var(--purple-soft)" }}>{c.icon}</span>
+              <span className="formula-num poll-icon">{ICONS[key]}</span>
               <div className="formula-text">
                 <div className="formula-top">
                   <h3>{c.name}</h3>
@@ -140,7 +168,7 @@ export default function PollPage() {
             ))}
           </select>
 
-          <label>הניש / התחום שלך (אופציונלי)</label>
+          <label>הניש / התחום שלכם (אופציונלי)</label>
           <input
             type="text"
             placeholder="למשל: אוטומציות AI לעסקים קטנים, ייעוץ HR, קופירייטינג"
@@ -171,7 +199,7 @@ export default function PollPage() {
           </button>
           {remaining !== null && (
             <div className="counter">
-              נותרו {remaining} ייצורים היום{remaining <= 0 ? " · בפעם הבאה נציג לך את הפרומפט" : ""}
+              נותרו {remaining} ייצורים היום{remaining <= 0 ? " · בפעם הבאה נציג לכם את הפרומפט" : ""}
             </div>
           )}
           {error && <div className="err">שגיאה: {error}</div>}
@@ -238,7 +266,7 @@ export default function PollPage() {
       {handoffPrompt && (
         <div className="card">
           <div className="handoff">
-            <h3>נגמרו 3 הייצורים להיום 🎯</h3>
+            <h3>נגמרו 3 הייצורים להיום</h3>
             <p>העתיקו את הפרומפט המלא ל-ChatGPT / Claude / Gemini שלכם, ותמשיכו לייצר סקרים בלי הגבלה:</p>
             <textarea readOnly value={handoffPrompt} />
             <div style={{ marginTop: 8 }}>

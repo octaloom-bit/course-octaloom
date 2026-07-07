@@ -9,7 +9,7 @@ import {
 import { checkAndIncrement, MAX_GEN } from "@/lib/ratelimit";
 
 const MODEL = "gemini-2.5-flash";
-const TONES: Tone[] = ["צינית", "חמה", "פרובוקטיבית"];
+const TONES: Tone[] = ["ציני", "חם", "פרובוקטיבי"];
 
 interface Body {
   category: string;
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "missing fields" }, { status: 400 });
   }
 
-  const tone: Tone = TONES.includes(body.tone) ? body.tone : "חמה";
+  const tone: Tone = TONES.includes(body.tone) ? body.tone : "חם";
   const lang: Lang = body.lang === "אנגלית" ? "אנגלית" : "עברית";
   const prompt = buildPollPrompt(
     body.category,
