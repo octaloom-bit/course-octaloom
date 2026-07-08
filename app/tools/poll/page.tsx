@@ -45,6 +45,7 @@ const ICONS: Record<string, React.ReactElement> = {
 export default function PollPage() {
   const [categoryKey, setCategoryKey] = useState<string | null>(null);
   const [tone, setTone] = useState<Tone>("חם");
+  const [topic, setTopic] = useState("");
   const [niche, setNiche] = useState("");
   const [audience, setAudience] = useState("");
   const [lang, setLang] = useState<Lang>("עברית");
@@ -77,7 +78,7 @@ export default function PollPage() {
       const res = await fetch("/api/poll", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ category: categoryKey, tone, niche, audience, lang }),
+        body: JSON.stringify({ category: categoryKey, tone, topic, niche, audience, lang }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -166,6 +167,17 @@ export default function PollPage() {
       {category && (
         <div className="card">
           <div className="step-label">שלב 2 · טון והקשר</div>
+
+          <label>על מה הסקר? מה בא לכם לשאול? (הכי חשוב)</label>
+          <input
+            type="text"
+            placeholder="למשל: אם עדיף לבנות סוכני AI או להישאר עם פרומפטים ידניים"
+            value={topic}
+            onChange={(e) => setTopic(e.target.value)}
+          />
+          <div className="field-hint">
+            ככל שתכתבו פה נושא או זווית ספציפית, הסקר יצא חד ורלוונטי. בלי זה מקבלים משהו כללי.
+          </div>
 
           <label>טון</label>
           <select value={tone} onChange={(e) => setTone(e.target.value as Tone)}>

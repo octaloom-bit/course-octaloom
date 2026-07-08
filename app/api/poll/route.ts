@@ -16,6 +16,7 @@ const TONES: Tone[] = ["ציני", "חם", "פרובוקטיבי"];
 interface Body {
   category: string;
   tone: Tone;
+  topic?: string;
   niche?: string;
   audience?: string;
   lang: Lang;
@@ -103,6 +104,7 @@ export async function POST(request: Request) {
   const prompt = buildPollPrompt(
     body.category,
     tone,
+    body.topic || "",
     body.niche || "",
     body.audience || "",
     lang
