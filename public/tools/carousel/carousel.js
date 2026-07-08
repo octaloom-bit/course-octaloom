@@ -182,6 +182,18 @@
       if (!raw) return false;
       var d = JSON.parse(raw);
       if (!d || !Array.isArray(d.slides) || !d.slides.length) return false;
+      // Heal old drafts that are actually a previous demo (the demo used to be persisted).
+      // If the saved deck's hook matches a retired demo, discard it so the fresh demo shows.
+      var STALE_DEMO_HOOKS = [
+        'חיסלתי את החשיפה שלי בלינקדאין',
+        'How I killed my own LinkedIn reach',
+        'כותרת מגנטית נכנסת בדיוק כאן',
+        'Your catchy title goes right here'
+      ];
+      if (STALE_DEMO_HOOKS.indexOf(String(d.slides[0] && d.slides[0].title || '')) !== -1) {
+        try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}
+        return false;
+      }
       state.contentLang = d.contentLang === 'en' ? 'en' : 'he';
       state.slides = d.slides.map(function (s) {
         return { id: s.id || newId(), role: s.role || 'content', title: String(s.title || ''), body: String(s.body || '') };
