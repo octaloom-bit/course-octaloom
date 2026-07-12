@@ -5,7 +5,7 @@
 
 export type PrintSection = { title: string; body: string };
 
-type PrintDocOptions = {
+export type PrintDocOptions = {
   title: string;
   eyebrow?: string;
   intro?: string;
@@ -22,7 +22,8 @@ function escapeHtml(value: string): string {
     .replace(/"/g, "&quot;");
 }
 
-function buildHtml(opts: PrintDocOptions): string {
+/** Branded RTL document, shared by the PDF print view and the emailed copy. */
+export function buildDocHtml(opts: PrintDocOptions): string {
   const sections = opts.sections
     .map(
       (s, i) => `
@@ -99,5 +100,5 @@ export function printPdf(opts: PrintDocOptions): void {
     setTimeout(cleanup, 60_000);
   };
 
-  iframe.srcdoc = buildHtml(opts);
+  iframe.srcdoc = buildDocHtml(opts);
 }

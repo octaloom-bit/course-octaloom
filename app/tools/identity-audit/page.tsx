@@ -10,9 +10,16 @@ import ToolNote from "@/components/ToolNote";
 
 const KEY = "octa-identity-audit";
 
+const DOC_EYEBROW = "לינקדאין עם OctaLoom · פרק 5";
+const DOC_TITLE = "ה-Identity Audit שלי";
+const DOC_INTRO =
+  "נוסחת הבידול שלי בתוכן. מישהו אחר יכול לדבר על אותו נושא, הוא לא יכול לדבר על הניסיון שלי.";
+const DOC_FOOTER = "octaloom.com · תחזרו לזה לפני כל פוסט.";
+
 export default function IdentityAuditPage() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [saved, setSaved] = useState(false);
+  const [mail, setMail] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   // Load any previous answers from localStorage (no backend needed).
   useEffect(() => {
@@ -59,23 +66,39 @@ export default function IdentityAuditPage() {
     setSaved(true);
   }
 
-  function email() {
-    const subject = encodeURIComponent("ה-Identity Audit שלי");
-    const body = encodeURIComponent(buildText());
-    syncTool("identity-audit", "use");
-    window.location.href = `mailto:?subject=${subject}&body=${body}`;
+  function docSections() {
+    return AUDIT_QUESTIONS.map((q) => ({ title: q.q, body: (answers[q.id] || "").trim() }));
+  }
+
+  async function email() {
+    setMail("sending");
+    try {
+      const res = await fetch("/api/email-tool", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: DOC_TITLE,
+          eyebrow: DOC_EYEBROW,
+          intro: DOC_INTRO,
+          footer: DOC_FOOTER,
+          sections: docSections(),
+        }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      setMail("sent");
+      syncTool("identity-audit", "use");
+    } catch {
+      setMail("error");
+    }
   }
 
   function pdf() {
     printPdf({
-      title: "ה-Identity Audit שלי",
-      eyebrow: "לינקדאין עם OctaLoom · פרק 5",
-      intro: "נוסחת הבידול שלי בתוכן. מישהו אחר יכול לדבר על אותו נושא, הוא לא יכול לדבר על הניסיון שלי.",
-      sections: AUDIT_QUESTIONS.map((q) => ({
-        title: q.q,
-        body: (answers[q.id] || "").trim(),
-      })),
-      footer: "octaloom.com · תחזרו לזה לפני כל פוסט.",
+      title: DOC_TITLE,
+      eyebrow: DOC_EYEBROW,
+      intro: DOC_INTRO,
+      sections: docSections(),
+      footer: DOC_FOOTER,
       fileName: "identity-audit",
     });
     syncTool("identity-audit", "use");
@@ -152,10 +175,24 @@ export default function IdentityAuditPage() {
               <button className="copy" onClick={pdf}>
                 הורדה כ-PDF
               </button>
-              <button className="copy" onClick={email}>
-                שליחה למייל שלי
+              <button className="copy" onClick={email} disabled={mail === "sending"}>
+                {mail === "sending"
+                  ? "שולחת…"
+                  : mail === "sent"
+                    ? "נשלח למייל ✓"
+                    : "שליחה למייל שלי"}
               </button>
             </div>
+            {mail === "error" && (
+              <p style={{ marginTop: 8, fontSize: 13, color: "var(--error)" }}>
+                השליחה נכשלה. אפשר להוריד כ-PDF או להעתיק את הטקסט.
+              </p>
+            )}
+            {mail === "sent" && (
+              <p style={{ marginTop: 8, fontSize: 13, color: "var(--faint)" }}>
+                שלחנו לכתובת שאיתה נרשמת לקורס.
+              </p>
+            )}
           </div>
         </div>
       )}
