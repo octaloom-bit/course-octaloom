@@ -34,11 +34,11 @@ export const PLAN: PlanSection[] = [
     meta: "עושים אותו פעם אחת ועוברים הלאה.",
     items: [
       { id: "w1-audit", minutes: 10, text: "עושים Identity Audit, 10 דקות. יש לזה כלי כאן באתר.", links: [{ match: "Identity Audit", href: "/tools/identity-audit" }] },
-      { id: "w1-profile", minutes: 30, text: "מעדכנים את הפרופיל במהלך השבוע: תמונה ובאנר." },
+      { id: "w1-profile", minutes: 30, text: "מעדכנים את הפרופיל במהלך השבוע: תמונה ובאנר.", links: [{ match: "תמונה", href: "/tools/profile-photo" }, { match: "באנר", href: "/tools/cover-text" }] },
       { id: "w1-headline", minutes: 20, text: "כותבים Headline (כותרת) לפי אחת משלוש הנוסחאות מפרק 2.", links: [{ match: "Headline", href: "/tools/headline" }] },
-      { id: "w1-about", minutes: 30, text: "מסדרים את ה-About ואת ה-Featured." },
+      { id: "w1-about", minutes: 30, text: "מסדרים את ה-About ואת ה-Featured.", links: [{ match: "About", href: "/tools/about" }] },
       { id: "w1-connect", minutes: 20, text: "מוסיפים כ-50 חיבורים רלוונטיים: אנשים שהם ICP או IFP שלכם. מחפשים לפי טייטל וחברה. לא יותר מ-20 בקשות ביום, אחרת לינקדאין עלול לחשוב שאתם בוט.", links: [{ match: "טייטל וחברה", href: "https://www.octagoodies.com/b2b-cluster", external: true }] },
-      { id: "w1-post", minutes: 30, text: "כותבים פוסט היכרות אחד בשיטת SLAA: סיפור אמיתי, לקח, עצה, שאלה. \"ככה אני עשיתי\", לא \"5 טיפים\"." },
+      { id: "w1-post", minutes: 30, text: "כותבים פוסט היכרות אחד בשיטת SLAA: סיפור אמיתי, לקח, עצה, שאלה. \"ככה אני עשיתי\", לא \"5 טיפים\".", links: [{ match: "בשיטת SLAA", href: "https://www.octagoodies.com/circulation-post-guide", external: true }] },
     ],
   },
   {
@@ -46,8 +46,8 @@ export const PLAN: PlanSection[] = [
     title: "שבוע 2: מגבירים את הקצב",
     meta: "מתחילים את גישת הסירקולציה.",
     items: [
-      { id: "w2-posts", minutes: 45, text: "מפרסמים 3 פוסטים השבוע: סקרנות, פגיעות, אוטוריטה. לפי ה-Identity Audit שלכם." },
-      { id: "w2-dm", minutes: 20, text: "שולחים 10 הודעות לאנשים שהתוכן שלהם עזר לכם, בלי אג'נדה. פשוט הודעה." },
+      { id: "w2-posts", minutes: 45, text: "מפרסמים 3 פוסטים השבוע: סקרנות, פגיעות, אוטוריטה. לפי ה-Identity Audit שלכם.", links: [{ match: "מפרסמים 3 פוסטים", href: "https://www.octagoodies.com/circulation-post-guide", external: true }, { match: "Identity Audit", href: "/tools/identity-audit" }] },
+      { id: "w2-dm", minutes: 20, text: "שולחים 10 הודעות לאנשים שהתוכן שלהם עזר לכם, בלי אג'נדה. פשוט הודעה.", links: [{ match: "שולחים 10 הודעות", href: "/tools/connections" }] },
     ],
   },
   {
@@ -55,7 +55,7 @@ export const PLAN: PlanSection[] = [
     title: "שבועות 3 ו-4: ניתוח ובניית lead magnet",
     meta: "אחרי שבועיים של תוכן עוצרים ומסתכלים מה עבד.",
     items: [
-      { id: "w34-analytics", minutes: 30, text: "נכנסים לאנליטיקס ושואלים איזה פוסט הכי עבד. מסתכלים על מעורבות, לא לייקים: מי הגיב, האם ICP או IFP, האם הגיעו הודעות פרטיות בעקבות פוסט." },
+      { id: "w34-analytics", minutes: 30, text: "נכנסים לאנליטיקס ושואלים איזה פוסט הכי עבד. מסתכלים על מעורבות, לא לייקים: מי הגיב, האם ICP או IFP, האם הגיעו הודעות פרטיות בעקבות פוסט.", links: [{ match: "נכנסים לאנליטיקס", href: "https://www.linkedin.com/analytics/creator/content/", external: true }] },
       { id: "w34-double", minutes: 20, text: "מבינים מזה איזה סוג תוכן שווה להשקיע בו עוד, ועושים ממנו יותר." },
       { id: "w34-magnet", minutes: 60, text: "בונים lead magnet, ואז בודקים אם אנשים הורידו והשתמשו, ואם זה ייצר שיחות." },
     ],
@@ -65,9 +65,9 @@ export const PLAN: PlanSection[] = [
     title: "שגרה יומית: 30 דקות",
     meta: "עבודת התחזוקה שמניעה את המנוע. חשובה בדיוק כמו התוכן.",
     items: [
-      { id: "d-comments", minutes: 15, text: "15 דקות: מגיבים לפוסטים בפיד ולפוסטים של ה-ICP שלכם. תגובה עניינית מעל 15 מילים מכפילה את החשיפה שלכם. בלי \"יא אלופה\"." },
-      { id: "d-dm", minutes: 5, text: "5 דקות: שולחים 2 עד 3 הודעות פרטיות ל-ICP שזיהיתם." },
-      { id: "d-connect", minutes: 5, text: "5 דקות: מוסיפים 2 עד 3 חיבורים חדשים רלוונטיים." },
+      { id: "d-comments", minutes: 15, text: "15 דקות: מגיבים לפוסטים בפיד ולפוסטים של ה-ICP שלכם. תגובה עניינית מעל 15 מילים מכפילה את החשיפה שלכם. בלי \"יא אלופה\".", links: [{ match: "מגיבים לפוסטים", href: "https://www.octagoodies.com/linkedin-commenter-pro", external: true }] },
+      { id: "d-dm", minutes: 5, text: "5 דקות: שולחים 2 עד 3 הודעות פרטיות ל-ICP שזיהיתם.", links: [{ match: "הודעות פרטיות", href: "/tools/connections" }] },
+      { id: "d-connect", minutes: 5, text: "5 דקות: מוסיפים 2 עד 3 חיבורים חדשים רלוונטיים.", links: [{ match: "חיבורים חדשים רלוונטיים", href: "https://www.octagoodies.com/b2b-cluster", external: true }] },
       { id: "d-reply", minutes: 5, text: "5 דקות: עונים על תגובות שקיבלתם על הפוסט שלכם." },
     ],
   },

@@ -1,7 +1,20 @@
-import { PLAN } from "@/lib/plan";
+import { PLAN, type PlanItem } from "@/lib/plan";
 import type { IcsEvent } from "@/lib/ics";
 
-const TOOL_URL = "https://course.octaloom.com/tools/weekly-plan";
+const SITE = "https://course.octaloom.com";
+const TOOL_URL = `${SITE}/tools/weekly-plan`;
+
+/** The tools an item points to, as absolute URLs, so they survive inside a calendar event. */
+function itemLinks(it: PlanItem): string {
+  const links = (it.links || []).filter((l) => !l.pending);
+  if (!links.length) return "";
+  return (
+    "\n\n" +
+    links
+      .map((l) => `${l.match}: ${l.href.startsWith("http") ? l.href : SITE + l.href}`)
+      .join("\n")
+  );
+}
 
 /** The next Sunday that has not started yet, so nothing lands in the past. */
 function nextSunday(from: Date): Date {
@@ -52,11 +65,11 @@ export function planEvents(checked: Record<string, boolean>, startHour: number):
   const sectionItems = (id: string) =>
     (PLAN.find((s) => s.id === id)?.items || []).filter((it) => open(it.id));
 
-  const task = (it: { id: string; text: string; minutes?: number }, start: Date, fallback: number) => {
+  const task = (it: PlanItem, start: Date, fallback: number) => {
     events.push({
       uid: `${it.id}@course.octaloom.com`,
       title: `לינקדאין: ${clean(it.text).split(/[.:]/)[0]}`,
-      description: `${clean(it.text)}\n\nמתוך תוכנית 30 הימים: ${TOOL_URL}`,
+      description: `${clean(it.text)}${itemLinks(it)}\n\nמתוך תוכנית 30 הימים: ${TOOL_URL}`,
       url: TOOL_URL,
       start,
       minutes: it.minutes || fallback,
@@ -86,7 +99,7 @@ export function planEvents(checked: Record<string, boolean>, startHour: number):
       uid: `daily-routine@course.octaloom.com`,
       title: "לינקדאין: השגרה היומית",
       description:
-        daily.map((it) => `• ${it.text}`).join("\n") + `\n\nהתוכנית המלאה: ${TOOL_URL}`,
+        daily.map((it) => `• ${it.text}${itemLinks(it)}`).join("\n") + `\n\nהתוכנית המלאה: ${TOOL_URL}`,
       url: TOOL_URL,
       start: at(base, 0, startHour, 0),
       minutes: daily.reduce((n, it) => n + (it.minutes || 5), 0),
@@ -103,7 +116,7 @@ export function planEvents(checked: Record<string, boolean>, startHour: number):
       uid: `measure-review@course.octaloom.com`,
       title: "לינקדאין: מדדים של סוף החודש",
       description:
-        measure.map((it) => `• ${it.text}`).join("\n") + `\n\nהתוכנית המלאה: ${TOOL_URL}`,
+        measure.map((it) => `• ${it.text}${itemLinks(it)}`).join("\n") + `\n\nהתוכנית המלאה: ${TOOL_URL}`,
       url: TOOL_URL,
       start: workday(base, 21, startHour, 30),
       minutes: measure.reduce((n, it) => n + (it.minutes || 10), 0),

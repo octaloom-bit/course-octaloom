@@ -136,11 +136,19 @@ export default function WeeklyPlanPage() {
     syncTool("weekly-plan", "use");
   }
 
-  // One card per plan section, each item a ✓/☐ line. Matches the emailed doc layout.
+  // One card per plan section, each item a ✓/☐ line followed by its tool links as
+  // absolute URLs (the anchors in the page are useless once the text leaves the browser).
   function docSections() {
+    const site = "https://course.octaloom.com";
+    const itemLine = (it: PlanItem) => {
+      const links = (it.links || [])
+        .filter((l) => !l.pending)
+        .map((l) => `   ↜ ${l.match}: ${l.href.startsWith("http") ? l.href : site + l.href}`);
+      return [`${checked[it.id] ? "✓" : "☐"} ${it.text}`, ...links].join("\n");
+    };
     return PLAN.map((s) => ({
       title: s.title,
-      body: [s.meta, "", ...s.items.map((it) => `${checked[it.id] ? "✓" : "☐"} ${it.text}`)].join("\n"),
+      body: [s.meta, "", ...s.items.map(itemLine)].join("\n"),
     }));
   }
 
