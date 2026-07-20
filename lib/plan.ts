@@ -46,7 +46,7 @@ export const PLAN: PlanSection[] = [
     title: "שבוע 2: מגבירים את הקצב",
     meta: "מתחילים את גישת הסירקולציה.",
     items: [
-      { id: "w2-posts", minutes: 45, text: "מפרסמים 3 פוסטים השבוע: סקרנות, פגיעות, אוטוריטה. לפי ה-Identity Audit שלכם.", links: [{ match: "מפרסמים 3 פוסטים", href: "https://www.octagoodies.com/circulation-post-guide", external: true }, { match: "Identity Audit", href: "/tools/identity-audit" }] },
+      { id: "w2-posts", minutes: 45, text: "מפרסמים 3 פוסטים השבוע: סקרנות, פגיעות, אוטוריטה. לפי ה-Identity Audit שלכם. אפשר שאחד מהם יהיה סקר.", links: [{ match: "מפרסמים 3 פוסטים", href: "https://www.octagoodies.com/circulation-post-guide", external: true }, { match: "Identity Audit", href: "/tools/identity-audit" }, { match: "יהיה סקר", href: "/tools/poll" }] },
       { id: "w2-dm", minutes: 20, text: "שולחים 10 הודעות לאנשים שהתוכן שלהם עזר לכם, בלי אג'נדה. פשוט הודעה.", links: [{ match: "שולחים 10 הודעות", href: "/tools/connections" }] },
     ],
   },
@@ -57,7 +57,7 @@ export const PLAN: PlanSection[] = [
     items: [
       { id: "w34-analytics", minutes: 30, text: "נכנסים לאנליטיקס ושואלים איזה פוסט הכי עבד. מסתכלים על מעורבות, לא לייקים: מי הגיב, האם ICP או IFP, האם הגיעו הודעות פרטיות בעקבות פוסט.", links: [{ match: "נכנסים לאנליטיקס", href: "https://www.linkedin.com/analytics/creator/content/", external: true }] },
       { id: "w34-double", minutes: 20, text: "מבינים מזה איזה סוג תוכן שווה להשקיע בו עוד, ועושים ממנו יותר." },
-      { id: "w34-magnet", minutes: 60, text: "בונים lead magnet, ואז בודקים אם אנשים הורידו והשתמשו, ואם זה ייצר שיחות." },
+      { id: "w34-magnet", minutes: 60, text: "בונים lead magnet, ואז בודקים אם אנשים הורידו והשתמשו, ואם זה ייצר שיחות.", links: [{ match: "בונים lead magnet", href: "/tools/carousel" }] },
     ],
   },
   {
@@ -79,7 +79,7 @@ export const PLAN: PlanSection[] = [
       { id: "m-dm", minutes: 15, text: "כמה DM נפתחו מתוך התוכן שלכם, ומאיזה פוסט." },
       { id: "m-connect", minutes: 10, text: "כמה אנשים שהם ICP שלכם הצטרפו לרשת." },
       { id: "m-leads", minutes: 15, text: "כמה הורידו את ה-lead magnet, נרשמו לניוזלטר, או הגיעו לאתר." },
-      { id: "m-ssi", minutes: 5, text: "SSI: מציצים מדי פעם אם הציון עלה. זה vanity metric, אז לא להתאבסס עליו.", links: [{ match: "SSI", href: "https://www.linkedin.com/sales/ssi", external: true }] },
+      { id: "m-ssi", minutes: 5, text: "SSI: מציצים מדי פעם אם הציון עלה. זה vanity metric, אז לא להתאבסס עליו.", links: [{ match: "SSI", href: "https://www.linkedin.com/sales/ssi", external: true }, { match: "הציון", href: "https://www.octagoodies.com/linkedin-presence-score", external: true }] },
     ],
   },
 ];

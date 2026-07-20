@@ -13,6 +13,7 @@ import {
   COFFEE_CHAT_INTRO,
   COFFEE_CHAT_NO_REFERRAL_NOTE,
   MYTHS,
+  MYTHS_INTRO,
   SOURCE_ARTICLE,
   WHY_BLOCKS,
 } from "@/content/coffee-chat";
@@ -116,7 +117,7 @@ export default function CoffeeChatPage() {
           כלי למחפשי עבודה
         </span>
         <h1>
-          שיחת ה<span className="accent">קפה</span>
+          קפה <span className="accent">זום</span>
         </h1>
         <p className="sub">{COFFEE_CHAT_INTRO}</p>
       </div>
@@ -129,38 +130,48 @@ export default function CoffeeChatPage() {
         <div className="card" key={b.heading}>
           <h3 style={{ margin: "0 0 10px", fontSize: 17, fontWeight: 500 }}>{b.heading}</h3>
           {b.body.map((p, i) => (
-            <p key={i} style={{ margin: "0 0 10px", fontSize: 15, lineHeight: 1.65 }}>{p}</p>
+            <p key={i} style={{ margin: "0 0 12px", fontSize: 15, lineHeight: 1.65 }}>{p}</p>
           ))}
-          {b.cite && (
-            <p style={{ margin: 0, fontSize: 13, color: "var(--muted)" }}>
-              מקור:{" "}
-              <a href={b.cite.url} target="_blank" rel="noopener noreferrer">
-                {b.cite.source}
-              </a>
-            </p>
-          )}
+          <p style={{ margin: 0, fontSize: 13, color: "var(--muted)" }}>
+            מקורות:{" "}
+            {b.cites.map((c, i) => (
+              <span key={c.url}>
+                {i > 0 && " · "}
+                <a className="src-link" href={c.url} target="_blank" rel="noopener noreferrer">
+                  {c.source}
+                </a>
+              </span>
+            ))}
+          </p>
         </div>
       ))}
 
-      <div className="section-head">
-        <h2>שני מספרים שתשמעו, ואסור להאמין להם</h2>
-      </div>
-
       <div className="card">
-        <p style={{ margin: "0 0 16px", fontSize: 15, lineHeight: 1.65 }}>
-          שניהם מסתובבים בכל קבוצת מחפשי עבודה, ושניהם הגיעו מספקים מסחריים בלי שום מתודולוגיה מאחוריהם.
-        </p>
-        {MYTHS.map((m) => (
-          <div className="copyline" key={m.claim} style={{ display: "block" }}>
-            <p style={{ fontWeight: 500, marginBottom: 6 }}>״{m.claim}״</p>
-            <p style={{ fontSize: 13.5, color: "var(--muted)" }}>{m.truth}</p>
-            {m.cite && (
-              <p style={{ margin: "6px 0 0", fontSize: 13, color: "var(--muted)" }}>
-                <a href={m.cite.url} target="_blank" rel="noopener noreferrer">{m.cite.source}</a>
-              </p>
-            )}
-          </div>
-        ))}
+        <div className="acc-list">
+          {MYTHS.map((m, i) => (
+            <details className="acc" key={m.claim}>
+              <summary className="acc-head">
+                <span className="acc-num">{String(i + 1).padStart(2, "0")}</span>
+                <span className="acc-title">
+                  <b>״{m.claim}״</b>
+                  <small>מספר שתשמעו הרבה, ואסור להאמין לו</small>
+                </span>
+                <span className="acc-chevron">▾</span>
+              </summary>
+              <div className="acc-body">
+                <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.65 }}>{m.truth}</p>
+                {m.cite && (
+                  <p style={{ margin: "8px 0 0", fontSize: 13, color: "var(--muted)" }}>
+                    <a className="src-link" href={m.cite.url} target="_blank" rel="noopener noreferrer">
+                      {m.cite.source}
+                    </a>
+                  </p>
+                )}
+              </div>
+            </details>
+          ))}
+        </div>
+        <p style={{ margin: "12px 6px 0", fontSize: 13, color: "var(--muted)" }}>{MYTHS_INTRO}</p>
       </div>
 
       <div className="pro-note">
@@ -168,7 +179,7 @@ export default function CoffeeChatPage() {
           <strong>מאיפה הרעיון לכלי</strong>
           <p>
             {SOURCE_ARTICLE.note}{" "}
-            <a href={SOURCE_ARTICLE.url} target="_blank" rel="noopener noreferrer">
+            <a className="src-link" href={SOURCE_ARTICLE.url} target="_blank" rel="noopener noreferrer">
               {SOURCE_ARTICLE.title}
             </a>{" "}
             ({SOURCE_ARTICLE.author}, {SOURCE_ARTICLE.date}).
@@ -394,7 +405,7 @@ export default function CoffeeChatPage() {
           <strong>{COFFEE_CHAT_NO_REFERRAL_NOTE.title}</strong>
           <p>
             {COFFEE_CHAT_NO_REFERRAL_NOTE.body}{" "}
-            <Link href={COFFEE_CHAT_NO_REFERRAL_NOTE.href}>
+            <Link className="src-link" href={COFFEE_CHAT_NO_REFERRAL_NOTE.href}>
               {COFFEE_CHAT_NO_REFERRAL_NOTE.linkLabel}
             </Link>
           </p>
