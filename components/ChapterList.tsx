@@ -76,8 +76,8 @@ export default function ChapterList() {
   }, []);
 
   const pctOf = (ch: Chapter) => Math.min(100, p[ch.id] || 0);
-  // "Next up" is the first unfinished chapter anywhere in the course.
-  const nextId = CHAPTERS.find((c) => pctOf(c) < 95)?.id;
+  // "Next up" tracks the numbered path only, same as the hero CTA.
+  const nextId = CORE.find((c) => pctOf(c) < 95)?.id;
 
   return (
     <>

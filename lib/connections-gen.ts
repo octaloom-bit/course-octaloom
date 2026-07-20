@@ -14,6 +14,8 @@ export interface Scenario {
   anchor: string; // course template used as a style example in the prompt
   materialLabel: string;
   materialPh: string;
+  /** Which tool the scenario belongs to. Omit when it fits both. */
+  audience?: "business" | "jobseeker";
 }
 
 export const SCENARIOS: Scenario[] = [
@@ -26,6 +28,18 @@ export const SCENARIOS: Scenario[] = [
       "היי [שם], ראיתי את הפוסט שלך על [נושא הפוסט]. זה בדיוק עניין שאני עוסקת בו. אשמח לראות עוד מהתוכן שלך בפיד שלי.",
     materialLabel: "הדביקו את הפוסט האחרון שלו (או כמה שורות ממנו)",
     materialPh: "העתיקו לכאן את הטקסט של הפוסט. ככל שיש יותר חומר, ההודעה פחות גנרית.",
+    audience: "business",
+  },
+  {
+    id: "target-company",
+    title: "בקשת חיבור למישהו בחברה שאתם מכוונים אליה",
+    when: "יש חברה שאתם רוצים להיכנס אליה. נכנסים לרשת של מי שעובד שם, דרך התוכן שלו.",
+    kind: "request",
+    anchor:
+      "היי [שם], ראיתי את הפוסט שלך על [נושא הפוסט]. זה בדיוק תחום שאני עובדת בו. אשמח לראות עוד מהתוכן שלך בפיד שלי.",
+    materialLabel: "הדביקו את הפוסט האחרון שלו (או כמה שורות ממנו)",
+    materialPh: "העתיקו לכאן את הטקסט של הפוסט. ככל שיש יותר חומר, ההודעה פחות גנרית.",
+    audience: "jobseeker",
   },
   {
     id: "peer",
@@ -36,6 +50,7 @@ export const SCENARIOS: Scenario[] = [
       "היי [שם], אנחנו שנינו ב[תחום] ואני עוקבת אחרי מה שאת משתפת. בא לי שנהיה מחוברים, יש מצב שנמצא נקודות לשת\"פ.",
     materialLabel: "מי האדם ומה משותף לכם",
     materialPh: "למשל: יועץ שיווק לסטארטאפים, כותב הרבה על ABM, שנינו עובדים עם חברות SaaS ישראליות",
+    audience: "business",
   },
   {
     id: "shared-context",
@@ -46,6 +61,7 @@ export const SCENARIOS: Scenario[] = [
       "היי [שם], נתקלתי בך ב[שם האירוע]. [משפט על משהו שאמר]. שמחה שנהיה מחוברים, מסקרן אותי לעקוב אחרי מה שאת עושה.",
     materialLabel: "איפה נתקלתם בו ומה קרה שם",
     materialPh: "למשל: וובינר של Gong על discovery calls, הוא שאל בצ'אט שאלה חכמה על כמה שאלות מותר לשאול בשיחה ראשונה",
+    audience: "business",
   },
   {
     id: "opener",
@@ -56,6 +72,18 @@ export const SCENARIOS: Scenario[] = [
       "היי [שם], ראיתי לאחרונה שכתבת על [נושא]. אני בדיוק מתמודדת עם זה אצל לקוח. איך הגעת לגישה הזאת?",
     materialLabel: "הדביקו פוסט שלו או תארו על מה הוא כותב",
     materialPh: "פוסט אחרון, או: כותב על מעבר מ-outbound ל-inbound, טוען שקול קורא יותר חשוב מכמות פניות",
+    audience: "business",
+  },
+  {
+    id: "opener-jobs",
+    title: "הודעת פתיחה אחרי אישור חיבור",
+    when: "כמה ימים אחרי שאישרו. שאלה מקצועית אמיתית, בלי לרמוז שאתם מחפשים עבודה.",
+    kind: "message",
+    anchor:
+      "היי [שם], ראיתי שכתבת על [נושא]. התמודדתי עם משהו דומה בתפקיד הקודם שלי. איך הגעתם לגישה הזאת?",
+    materialLabel: "הדביקו פוסט שלו או תארו על מה הוא כותב",
+    materialPh: "פוסט אחרון שלו, או: מה התפקיד שלו ועל מה הוא כותב בדרך כלל",
+    audience: "jobseeker",
   },
   {
     id: "ifp",
@@ -66,6 +94,7 @@ export const SCENARIOS: Scenario[] = [
       "היי [שם], ראיתי את הפוסט שלך על [נושא], זה עשה לי סדר בראש. תודה.",
     materialLabel: "הדביקו את הפוסט שנתן לכם ערך",
     materialPh: "העתיקו את הפוסט, או תארו מה בדיוק הוא אמר שעזר לכם",
+    audience: "business",
   },
   {
     id: "insider-open",
@@ -76,6 +105,7 @@ export const SCENARIOS: Scenario[] = [
       "היי [שם], ראיתי שכתבת על [נושא]. עשיתי משהו דומה ונתקלתי בדיוק בבעיה שתיארת. איך פתרתם את זה בסוף?",
     materialLabel: "הדביקו פוסט שלו, או תארו מה הוא עושה בחברה",
     materialPh: "העתיקו פוסט אחרון שלו. אם אין, תארו: מה התפקיד שלו, על מה הוא כותב, ומה משותף לכם מקצועית",
+    audience: "jobseeker",
   },
   {
     id: "referral-ask",
@@ -86,6 +116,7 @@ export const SCENARIOS: Scenario[] = [
       "אני רואה שאתם מגייסים ל[תפקיד]. אשמח להגיש דרכך, אם זה מתאים לך.",
     materialLabel: "על איזו משרה מדובר, ומה כבר נאמר ביניכם",
     materialPh: "למשל: משרת Customer Success Manager. דיברנו לפני שבוע על תהליך מניעת נטישה שהוא בנה, והוא ענה לי בפירוט",
+    audience: "jobseeker",
   },
   {
     id: "pre-post",
@@ -96,8 +127,14 @@ export const SCENARIOS: Scenario[] = [
       "היי [שם], בא לי לשמוע את הזווית שלך על [נושא] לפני שאני מעלה משהו בנושא. איך את רואה את זה?",
     materialLabel: "על מה הפוסט שלכם, ומה אתם יודעים על האדם",
     materialPh: "למשל: פוסט על טעויות בפתיחת שיחות מכירה. הוא סמנכ\"ל מכירות שכתב פעם שהוא שונא סקריפטים",
+    audience: "business",
   },
 ];
+
+/** Scenarios for one of the two connection tools. Untagged ones appear in both. */
+export function scenariosFor(audience: "business" | "jobseeker"): Scenario[] {
+  return SCENARIOS.filter((s) => !s.audience || s.audience === audience);
+}
 
 export interface GenInput {
   scenarioId: string;

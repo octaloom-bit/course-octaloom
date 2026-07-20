@@ -55,6 +55,13 @@ const ICONS: Record<string, React.ReactNode> = {
       <path d="m8.2 10.8 7.6-3.6M8.2 13.2l7.6 3.6" />
     </>
   ),
+  "coffee-chat": (
+    <>
+      <path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z" />
+      <path d="M17 9.5h1.8a2.5 2.5 0 0 1 0 5H17" />
+      <path d="M8 2.5v2.2M12 2.5v2.2" />
+    </>
+  ),
   posts: (
     <>
       <rect x="4" y="4" width="16" height="16" rx="2" />

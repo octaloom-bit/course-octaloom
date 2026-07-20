@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { syncTool, currentToolId } from "@/lib/progress-sync";
 import {
-  SCENARIOS,
+  scenariosFor,
   getScenario,
   type Gender,
   type MsgLang,
@@ -12,7 +12,15 @@ import {
 // AI generator for personalized connection messages: pick a scenario, paste the
 // prospect's post, get 3 variations in the course method. Same 3+prompt handoff
 // mechanic as the headline generator.
-export default function ConnectionGenerator() {
+//
+// `audience` picks the scenario set: the business tool and the job-seeker tool are
+// the same generator with different scenarios and different prompt rules.
+export default function ConnectionGenerator({
+  audience = "business",
+}: {
+  audience?: "business" | "jobseeker";
+}) {
+  const scenarios = scenariosFor(audience);
   const [scenarioId, setScenarioId] = useState<string | null>(null);
   const [prospectName, setProspectName] = useState("");
   const [prospectGender, setProspectGender] = useState<Gender>("זכר");
@@ -101,7 +109,7 @@ export default function ConnectionGenerator() {
       <div className="card">
         <div className="step-label">שלב 1 · בחרו תרחיש</div>
         <div className="formula-grid">
-          {SCENARIOS.map((s, i) => (
+          {scenarios.map((s, i) => (
             <div
               key={s.id}
               className={`formula${scenarioId === s.id ? " active" : ""}`}

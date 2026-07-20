@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { CHAPTERS } from "@/lib/chapters";
-import { getProgress, overallPercent, completedCount, type ProgressMap } from "@/lib/progress";
+import { coreChapters } from "@/lib/chapters";
+import { getProgress, overallPercent, completedCount, coreCount, type ProgressMap } from "@/lib/progress";
 
 export default function HeroProgress() {
   const [p, setP] = useState<ProgressMap>({});
@@ -21,8 +21,9 @@ export default function HeroProgress() {
 
   const overall = overallPercent(p);
   const done = completedCount(p);
-  const nextIdx = CHAPTERS.findIndex((c) => Math.min(100, p[c.id] || 0) < 95);
-  const next = nextIdx === -1 ? null : CHAPTERS[nextIdx];
+  const core = coreChapters();
+  const next = core.find((c) => Math.min(100, p[c.id] || 0) < 95) ?? null;
+  const total = coreCount();
 
   return (
     <div className="hp">
@@ -40,9 +41,9 @@ export default function HeroProgress() {
         <span className="hp-pct">{overall}%</span>
       </div>
       <div className="hp-meta">
-        {done === CHAPTERS.length
+        {done === total
           ? "כל הפרקים הושלמו"
-          : `${done} מתוך ${CHAPTERS.length} פרקים הושלמו`}
+          : `${done} מתוך ${total} פרקים הושלמו`}
       </div>
     </div>
   );

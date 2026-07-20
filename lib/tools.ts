@@ -93,6 +93,15 @@ export const TOOLS: Tool[] = [
     audience: "jobseeker",
   },
   {
+    id: "coffee-chat",
+    title: "שיחת הקפה",
+    desc: "החיבור אושר ונקבעה שיחה. פתיח של 30 שניות, 5 שאלות מדורגות, שאלה אחת שלא לשאול, והודעת המשך ליום שאחרי. עם הרקע המחקרי למה זה עובד.",
+    href: "/tools/coffee-chat",
+    type: "ai",
+    status: "live",
+    audience: "jobseeker",
+  },
+  {
     id: "poll",
     title: "מחולל סקרים ללינקדאין",
     desc: "בחרו קטגוריה וטון, קבלו 3 רעיונות סקר מוכנים עם אופציות, פתיח לפוסט ולמה זה עובד. לפי פרק 3.",
@@ -127,6 +136,17 @@ export const TOOLS: Tool[] = [
     type: "ai",
     status: "live",
     chapters: ["chapter-4"],
+    audience: "business",
+  },
+  {
+    id: "connections-jobs",
+    title: "הודעות חיבור למחפשי עבודה",
+    desc: "ארבעה תרחישים לפי הרצף מפרק 7: מתחברים למישהו מהצוות, פותחים שיחה אמיתית, ורק אז מבקשים הפניה למשרה.",
+    href: "/tools/connections-jobs",
+    type: "ai",
+    status: "live",
+    chapters: ["chapter-7"],
+    audience: "jobseeker",
   },
   {
     id: "posts",

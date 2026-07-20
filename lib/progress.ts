@@ -1,4 +1,4 @@
-import { CHAPTERS } from "./chapters";
+import { coreChapters } from "./chapters";
 
 // Per-user course progress, stored in localStorage (no backend needed for v1).
 const KEY = "octa-course-progress";
@@ -30,12 +30,18 @@ export function markComplete(id: string) {
   setChapterProgress(id, 100);
 }
 
+// Measured against the numbered chapters only — the prelude is optional.
 export function overallPercent(p: ProgressMap): number {
-  if (!CHAPTERS.length) return 0;
-  const sum = CHAPTERS.reduce((a, c) => a + Math.min(100, p[c.id] || 0), 0);
-  return Math.round(sum / CHAPTERS.length);
+  const core = coreChapters();
+  if (!core.length) return 0;
+  const sum = core.reduce((a, c) => a + Math.min(100, p[c.id] || 0), 0);
+  return Math.round(sum / core.length);
 }
 
 export function completedCount(p: ProgressMap): number {
-  return CHAPTERS.filter((c) => (p[c.id] || 0) >= 95).length;
+  return coreChapters().filter((c) => (p[c.id] || 0) >= 95).length;
+}
+
+export function coreCount(): number {
+  return coreChapters().length;
 }
