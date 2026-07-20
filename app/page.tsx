@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import LinkedInIcon from "@/components/LinkedInIcon";
 import ChapterList from "@/components/ChapterList";
 import HeroProgress from "@/components/HeroProgress";
@@ -75,6 +76,12 @@ export default async function CoursePage() {
       </section>
 
       <ChapterList />
+
+      <div className="home-glossary">
+        <Link href="/glossary" className="recap-link">
+          ← כל המושגים של הקורס במקום אחד
+        </Link>
+      </div>
       </div>
     </>
   );

@@ -12,6 +12,26 @@ export interface Tool {
   external?: boolean; // href points to another site; open in a new tab
   type: ToolType;
   status: ToolStatus;
+  /** Chapter ids (from lib/chapters.ts) this tool belongs to.
+   *  Drives the tool list shown on each lesson page. */
+  chapters?: string[];
+  /** Which track the tool serves. Omit when it serves both,
+   *  which is the case for most of them. Drives the filter on /tools. */
+  audience?: "business" | "jobseeker";
+}
+
+export type ToolFilter = "all" | "business" | "jobseeker";
+
+export const TOOL_FILTERS: { id: ToolFilter; label: string }[] = [
+  { id: "all", label: "הכל" },
+  { id: "business", label: "לעצמאים ובעלי עסק" },
+  { id: "jobseeker", label: "למחפשי עבודה" },
+];
+
+/** A tool with no audience serves everyone, so it shows under every filter. */
+export function toolsForAudience(filter: ToolFilter): Tool[] {
+  if (filter === "all") return TOOLS;
+  return TOOLS.filter((t) => !t.audience || t.audience === filter);
 }
 
 // Order matters: this is the display order on the /tools dashboard.
@@ -23,6 +43,7 @@ export const TOOLS: Tool[] = [
     href: "/tools/carousel",
     type: "ai",
     status: "live",
+    chapters: ["chapter-3"],
   },
   {
     id: "identity-audit",
@@ -31,6 +52,7 @@ export const TOOLS: Tool[] = [
     href: "/tools/identity-audit",
     type: "static",
     status: "live",
+    chapters: ["chapter-5"],
   },
   {
     id: "profile-photo",
@@ -39,6 +61,7 @@ export const TOOLS: Tool[] = [
     href: "/tools/profile-photo",
     type: "static",
     status: "live",
+    chapters: ["chapter-2"],
   },
   {
     id: "headline",
@@ -47,6 +70,27 @@ export const TOOLS: Tool[] = [
     href: "/tools/headline",
     type: "ai",
     status: "live",
+    chapters: ["chapter-2"],
+  },
+  {
+    id: "skills",
+    title: "סורק הכישורים (Skills)",
+    desc: "מדביקים את סעיף הניסיון, וסורקים אילו כישורים נופלים בין הכיסאות. שתי דקות, וזה הדבר הכי משתלם בפרק 6 ליחידת זמן.",
+    href: "/tools/skills",
+    type: "static",
+    status: "live",
+    chapters: ["chapter-1", "chapter-6"],
+    audience: "jobseeker",
+  },
+  {
+    id: "case-study",
+    title: "פוסט קייס סטאדי",
+    desc: "סיפור אחד מהעבודה שלכם הופך לפוסט בארבעה חלקים, עם סגירה שאומרת שאתם מחפשים בלי להתחנן. לפי פרק 7.",
+    href: "/tools/case-study",
+    type: "static",
+    status: "live",
+    chapters: ["chapter-3", "chapter-7"],
+    audience: "jobseeker",
   },
   {
     id: "poll",
@@ -55,6 +99,7 @@ export const TOOLS: Tool[] = [
     href: "/tools/poll",
     type: "ai",
     status: "live",
+    chapters: ["chapter-3"],
   },
   {
     id: "cover-text",
@@ -63,6 +108,7 @@ export const TOOLS: Tool[] = [
     href: "/tools/cover-text",
     type: "static",
     status: "live",
+    chapters: ["chapter-2"],
   },
   {
     id: "about",
@@ -71,6 +117,7 @@ export const TOOLS: Tool[] = [
     href: "/tools/about",
     type: "static",
     status: "live",
+    chapters: ["chapter-2"],
   },
   {
     id: "connections",
@@ -79,6 +126,7 @@ export const TOOLS: Tool[] = [
     href: "/tools/connections",
     type: "ai",
     status: "live",
+    chapters: ["chapter-4"],
   },
   {
     id: "posts",
@@ -86,6 +134,7 @@ export const TOOLS: Tool[] = [
     desc: "תבניות פוסט מוכנות עם מקומות למילוי, לפי מטרת התוכן.",
     type: "static",
     status: "soon",
+    chapters: ["chapter-3"],
   },
   {
     id: "circulation-guide",
@@ -95,6 +144,7 @@ export const TOOLS: Tool[] = [
     external: true,
     type: "static",
     status: "live",
+    chapters: ["chapter-3"],
   },
   {
     id: "linkedin-commenter",
@@ -104,6 +154,7 @@ export const TOOLS: Tool[] = [
     external: true,
     type: "static",
     status: "live",
+    chapters: ["chapter-3", "chapter-4"],
   },
   {
     id: "linkedin-formatter",
@@ -113,6 +164,7 @@ export const TOOLS: Tool[] = [
     external: true,
     type: "static",
     status: "live",
+    chapters: ["chapter-2"],
   },
   {
     id: "b2b-outreach",
@@ -122,6 +174,8 @@ export const TOOLS: Tool[] = [
     external: true,
     type: "static",
     status: "live",
+    chapters: ["chapter-3", "chapter-4"],
+    audience: "business",
   },
   {
     id: "meeting-links",
@@ -131,6 +185,7 @@ export const TOOLS: Tool[] = [
     external: true,
     type: "static",
     status: "live",
+    chapters: ["chapter-2", "chapter-4"],
   },
   {
     id: "presence-score",
@@ -140,6 +195,7 @@ export const TOOLS: Tool[] = [
     external: true,
     type: "static",
     status: "live",
+    chapters: ["chapter-0", "chapter-1", "chapter-2"],
   },
   {
     id: "content-partner",
@@ -147,6 +203,7 @@ export const TOOLS: Tool[] = [
     desc: "Gem ייעודי שעוזר לבנות voice, לוח תוכן 30 יום, ופוסטים.",
     type: "gem",
     status: "soon",
+    chapters: ["chapter-5"],
   },
   {
     id: "weekly-plan",
@@ -155,5 +212,13 @@ export const TOOLS: Tool[] = [
     href: "/tools/weekly-plan",
     type: "static",
     status: "live",
+    chapters: ["chapter-5"],
   },
 ];
+
+/** Live tools attached to a chapter, in the dashboard display order. */
+export function toolsForChapter(chapterId: string): Tool[] {
+  return TOOLS.filter(
+    (t) => t.status === "live" && t.href && t.chapters?.includes(chapterId),
+  );
+}

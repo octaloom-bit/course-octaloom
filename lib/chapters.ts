@@ -11,23 +11,40 @@ export interface Chapter {
   vimeoId?: string;
   wistiaId?: string;
   overview?: { hook: string; body: string };
+  /** Relevance tag shown next to the chapter in the list. */
+  audience?: "all" | "business" | "jobseeker";
+  /** Extra half-sentence for chapters that are partly relevant to the other track. */
+  audienceNote?: string;
+  /** "prelude" chapters are the welcome + platform basics: optional context,
+   *  not part of the numbered learning path. Everything else is "core". */
+  track?: "prelude" | "core";
 }
+
+export const AUDIENCE_LABEL: Record<NonNullable<Chapter["audience"]>, string> = {
+  all: "לכולם",
+  business: "לעצמאים ובעלי עסק",
+  jobseeker: "למחפשי עבודה",
+};
 
 export const CHAPTERS: Chapter[] = [
   {
     id: "intro",
+    track: "prelude",
+    audience: "all",
     label: "פתיח",
     title: "ברוכים הבאים לקורס",
-    desc: "מה נלמד, איך הקורס בנוי, ואיך להפיק ממנו את המקסימום.",
-    duration: "2:05 דק׳",
+    desc: "מה נלמד, איך הקורס בנוי, ולמי כל מסלול מיועד.",
+    duration: "1:45 דק׳",
     wistiaId: "ij70od52q1",
     overview: {
       hook: "נעים מאוד, אני חניתה.",
-      body: `אשת שיווק B2B, מנהלת עמודי לינקדאין למנכ"לים ומייסדים ובונה תוכניות שגריר לארגונים, עם כלי וסוכני AI שאני מייצרת בעצמי. אני מתפקדת כמחלקת שיווק שלמה, רק בלי המחלקה. הקורס הזה הוא 5 פרקים שאפשר לסיים ביום אחד (ואם את ממוקדת, בפחות משעתיים): איך למצב את עצמך בלינקדאין, איך להפוך פוסטים לכלי גיוס לידים, ואיך לצאת עם תוכנית פעולה. מתאים ליזמות, יועצות, פרילנסריות, וכל מי שרוצה שיכירו אותה בשביל מה שהיא יודעת ועושה, ומוכנה להשקיע 30 דקות ביום. פחות מתאים למי שמחפשת תוצאות תוך שבוע, ללינקדאין לוקח זמן. שלושה חודשים של עקביות זה המינימום.`,
+      body: `אשת שיווק B2B, מנהלת עמודי לינקדאין למנכ"לים ומייסדים ובונה תוכניות שגריר לארגונים, עם כלי וסוכני AI שאני מייצרת בעצמי. אני מתפקדת כמחלקת שיווק שלמה, רק בלי המחלקה. הקורס מונה שמונה פרקים שאפשר לסיים ביום אחד (ואם אתם ממוקדים, בפחות משעתיים), והוא נחלק לשני מסלולים. פרקים 0 עד 5 הם הליבה: איך למצב את עצמכם, איך להפוך את הפרופיל לדף נחיתה, איזה תוכן מייצר שיחות, ואיך בונים גשר מליד ללקוח משלם. פרקים 6 ו-7 נכתבו למי שמחפש עבודה: איך מגייסת מוצאת אתכם בעולם שבו החיפוש הפך סמנטי, ואיך נכנסים דרך בן אדם ולא דרך טופס. ליד כל פרק מסומן למי הוא רלוונטי. מתאים ליזמים, מייסדים, יועצים ופרילנסרים, וגם למחפשי עבודה, בתנאי שאתם מוכנים להשקיע 30 דקות ביום. פחות מתאים למי שמחפש תוצאות תוך שבוע, ללינקדאין לוקח זמן. שלושה חודשים של עקביות זה המינימום.`,
     },
   },
   {
     id: "chapter-0",
+    track: "prelude",
+    audience: "all",
     label: "פרק 0",
     title: "לינקדאין 101",
     desc: "השפה הבסיסית של הפלטפורמה לפני שנכנסים לאסטרטגיה. מי שכבר פעיל יכול לדלג.",
@@ -40,6 +57,8 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: "chapter-1",
+    track: "core",
+    audience: "all",
     label: "פרק 1",
     title: "למה לינקדאין ב-2026? + האלגוריתם שהשתנה",
     desc: "למה לינקדאין הוא מנוע צמיחה ב-2026, ואיך האלגוריתם החדש עובד.",
@@ -52,6 +71,8 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: "chapter-2",
+    track: "core",
+    audience: "all",
     label: "פרק 2",
     title: "הפרופיל כ-AI Prompt ודף נחיתה",
     desc: "לבנות פרופיל שעובד כמו דף נחיתה: תמונה, באנר, כותרת, ו-About.",
@@ -64,6 +85,8 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: "chapter-3",
+    track: "core",
+    audience: "all",
     label: "פרק 3",
     title: 'תוכן שעובד: "how I" מנצח "how-to"',
     desc: "למה ניסיון חי מנצח מידע יבש, ואיך לכתוב תוכן שבאמת עובד.",
@@ -76,11 +99,14 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: "chapter-4",
+    track: "core",
     label: "פרק 4",
     title: "Lead Magnets + Social Selling",
     desc: "להפוך תוכן לשיחות וללקוחות: lead magnets ו-social selling.",
     duration: "12:43 דק׳",
     wistiaId: "nbexqav6gb",
+    audience: "business",
+    audienceNote: "מחפשי עבודה: הליד מגנט פחות רלוונטי, החלק על בניית רשת ו-DM כן",
     overview: {
       hook: "בנית פרופיל, בנית תוכן. אבל ליד שנשאר בלינקדאין לא הופך ללקוח.",
       body: `בפרק הזה בונים את הגשר מתוכן שמקבל מעורבות לתוכן שמביא לקוחות. נתחיל ב-Lead Magnet, פוליסת הביטוח של העסק שלך, כי האלגוריתם ישתנה אבל רשימת התפוצה נשארת שלך. נראה איך בונים אחד שעובד (בעיה צרה, לא רחבה, ושם שגורם לזה להרגיש שווה), למה ManyChat הוא אזור אפור בלינקדאין, ואיך מנסחים CTA שמוריד חיכוך. אחר כך רצף החימום ב-5 שלבים שהופך הורדה לשיחה, ולסיום ה-[SSI](https://www.linkedin.com/sales/ssi): ארבע הקטגוריות שלו, למה הוא חשוב לאלגוריתם, ואיך לבנות רשת ולשלוח DM ובקשות חיבור בלי שזה ירגיש מכירתי.`,
@@ -88,6 +114,8 @@ export const CHAPTERS: Chapter[] = [
   },
   {
     id: "chapter-5",
+    track: "core",
+    audience: "all",
     label: "פרק 5",
     title: "תוכנית פעולה ל-30 יום",
     desc: "הזווית הייחודית שלכם, שגרה שבועית, ומה למדוד. סיכום כל הקורס.",

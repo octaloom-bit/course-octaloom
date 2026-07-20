@@ -63,6 +63,25 @@ export const FORMULAS: Record<string, Formula> = {
       { id: "proof", label: "הוכחה (אופציונלי)", ph: "למשל: 100+ פגישות" },
     ],
   },
+  jobseeker: {
+    name: "מחפשי עבודה",
+    structure: "תפקיד היעד + התחום או ההתמחות + נקודת הוכחה אחת",
+    when: "כשאתם מחפשים עבודה, והכותרת צריכה לדבר למגייסת ולא ללקוח",
+    example: "Customer Success Manager | B2B SaaS | 94% retention across 60 accounts",
+    fields: [
+      {
+        id: "target",
+        label: "התפקיד שאתם מכוונים אליו, בשפה שהשוק מכיר",
+        ph: "למשל: Customer Success Manager, מנהלת קמפיינים, בקר מלאי. לא שם פנימי כמו Growth Ninja",
+      },
+      { id: "domain", label: "התחום או ההתמחות", ph: "למשל: B2B SaaS, קמעונאות, מוסדות בריאות, פינטק" },
+      {
+        id: "proof",
+        label: "נקודת הוכחה אחת שאי אפשר להמציא",
+        ph: "למשל: שימור 94% בתיק של 60 לקוחות. אם אין מספר: 4 שנים בחברות SaaS בצמיחה",
+      },
+    ],
+  },
 };
 
 export function buildPrompt(formulaKey: string, answers: Record<string, string>, lang: Lang): string {
@@ -85,7 +104,21 @@ export function buildPrompt(formulaKey: string, answers: Record<string, string>,
 "יועצת מיסוי לעצמאים שמדברת בגובה העיניים. בלי ז'רגון, בלי הפתעות בסוף השנה. 200+ עצמאים."
 "בונה חנויות Shopify שמוכרות. עיצוב נקי, צ'קאאוט שלא נוטשים. 80+ מותגים."`;
 
+  // Job seekers write to a recruiter, not a client. Different reader, different rules.
+  const audienceRules =
+    formulaKey === "jobseeker"
+      ? `
+הקורא (קריטי — זה שונה משאר הנוסחאות):
+- הקורא הוא **מגייסת**, לא לקוח. היא לא קונה שירות, היא מחפשת מישהו שכבר עשה את העבודה.
+- אסור לנסח הצעת שירות, אסור "אני עוזר ל", ואסור קריאה לפעולה מכירתית.
+- **שדה התפקיד שהמשתמש נתן חייב להופיע כלשונו**, כי מגייסות מקלידות אותו בחיפוש. אל תחליפי אותו בניסוח יצירתי.
+- אסור בהחלט: passionate, results-driven, thought leader, motivated, hard worker, team player. אף מגייסת לא מחפשת את המילים האלה.
+- אם המשתמש נתן הוכחה בלי מספר (שנות ניסיון, סוג חברות), זה לגיטימי לגמרי. אל תמציאי מספר שלא נתן.
+- מבנה מומלץ: תפקיד, ואז התחום, ואז ההוכחה. מפרידים בקו אנכי או בנקודה מרכזית.`
+      : "";
+
   return `את קופירייטרית מומחית לכותרות פרופיל בלינקדאין. את כותבת כותרת אחת מצוינת ב-5 וריאציות.
+${audienceRules}
 
 הנוסחה: "${f.name}" — ${f.structure}.
 
