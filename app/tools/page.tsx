@@ -17,7 +17,7 @@ export default function ToolsPage() {
         </div>
       </section>
 
-      <div className="wrap">
+      <div className="wrap wide">
         <ToolsGrid />
       </div>
     </>
